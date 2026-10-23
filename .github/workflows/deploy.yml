@@ -1,0 +1,34 @@
+name: Deploy static site to FTP
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch: # Also allows a manual run from the Actions tab
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      # Uploads the site as-is (no build). Only changed files are sent after the first run.
+      # Repository secrets (Settings > Secrets and variables > Actions):
+      #   FTP_HOST      e.g. ftp.example.com
+      #   FTP_USERNAME
+      #   FTP_PASSWORD
+      #   FTP_FOLDER    e.g. webroots/www  (no trailing slash)
+      - name: Deploy to FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ secrets.FTP_FOLDER }}/
+          local-dir: ./
+          # dangerous-clean-slate stays off, so the app folders next to the site are never touched
+          exclude: |
+            **/.git*
+            **/.git*/**
+            .github/**
+            README.md

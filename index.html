@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Børnenes Spil</title>
+  <meta name="description" content="Små lærerige spil om tal, terninger og stavning – lavet til børn." />
+  <link rel="icon" type="image/png" href="billeder/favicon.png" />
+  <link rel="apple-touch-icon" href="billeder/numbertowers.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #fff8ee;
+      --bg-dots: #f3e3c9;
+      --surface: #ffffff;
+      --ink: #2b2340;
+      --ink-soft: #625a78;
+      --line: #eadfcd;
+      --shadow: 0 2px 0 rgba(43, 35, 64, .06), 0 12px 28px -14px rgba(43, 35, 64, .28);
+      --c1: #ff6b6b; --c2: #4dabf7; --c3: #51cf66; --c4: #fcc419; --c5: #b197fc; --c6: #ff922b;
+      --tag-bg: #f6efe3;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #1c1a26; --bg-dots: #2a2738; --surface: #262334; --ink: #f4efe6; --ink-soft: #b6aec8;
+        --line: #3a3550; --shadow: 0 12px 28px -14px rgba(0, 0, 0, .7); --tag-bg: #322e44;
+      }
+    }
+    :root[data-theme="dark"] {
+      --bg: #1c1a26; --bg-dots: #2a2738; --surface: #262334; --ink: #f4efe6; --ink-soft: #b6aec8;
+      --line: #3a3550; --shadow: 0 12px 28px -14px rgba(0, 0, 0, .7); --tag-bg: #322e44;
+    }
+
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      font-family: "Nunito", system-ui, sans-serif;
+      color: var(--ink);
+      background-color: var(--bg);
+      background-image: radial-gradient(var(--bg-dots) 1.5px, transparent 1.5px);
+      background-size: 22px 22px;
+      line-height: 1.55;
+    }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+
+    header { text-align: center; padding: 56px 0 28px; }
+    .bubbles { display: inline-flex; gap: 8px; margin-bottom: 18px; }
+    .bubbles span {
+      width: 44px; height: 44px; border-radius: 14px; display: grid; place-items: center;
+      font: 700 22px/1 "Fredoka", sans-serif; color: #fff; box-shadow: var(--shadow);
+    }
+    .bubbles span:nth-child(1) { background: var(--c1); transform: rotate(-8deg); }
+    .bubbles span:nth-child(2) { background: var(--c2); transform: rotate(5deg); }
+    .bubbles span:nth-child(3) { background: var(--c3); transform: rotate(-3deg); }
+    .bubbles span:nth-child(4) { background: var(--c4); transform: rotate(7deg); color: #5c4400; }
+    h1 {
+      font: 700 clamp(2.2rem, 6vw, 3.6rem)/1.05 "Fredoka", sans-serif;
+      margin: 0 0 12px; letter-spacing: -.01em;
+    }
+    .lead { margin: 0 auto; max-width: 34rem; color: var(--ink-soft); font-size: 1.1rem; }
+
+    .grid {
+      display: grid; gap: 22px; padding: 20px 0 48px;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+    }
+    .card {
+      --accent: var(--c1);
+      position: relative; display: flex; flex-direction: column;
+      background: var(--surface); border: 1px solid var(--line); border-radius: 26px;
+      padding: 22px; box-shadow: var(--shadow); color: inherit; text-decoration: none;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .card::before {
+      content: ""; position: absolute; inset: 0 0 auto; height: 8px;
+      border-radius: 26px 26px 0 0; background: var(--accent);
+    }
+    .card:hover, .card:focus-visible { transform: translateY(-4px) rotate(-.4deg); }
+    .card:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+    .card:hover .icon { transform: rotate(-6deg) scale(1.05); }
+
+    .top { display: flex; align-items: center; gap: 16px; margin: 6px 0 14px; }
+    .icon {
+      width: 88px; height: 88px; flex: none; border-radius: 22px; object-fit: cover;
+      box-shadow: 0 6px 16px -8px rgba(0, 0, 0, .4); transition: transform .2s ease;
+      background: var(--tag-bg);
+    }
+    h2 { font: 600 1.55rem/1.15 "Fredoka", sans-serif; margin: 0; }
+    .orig { display: block; font-size: .85rem; color: var(--ink-soft); margin-top: 2px; }
+    .card p { margin: 0 0 16px; flex: 1; }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; padding: 0; list-style: none; }
+    .tags li {
+      font-size: .8rem; font-weight: 700; padding: 4px 10px; border-radius: 999px;
+      background: var(--tag-bg); color: var(--ink-soft);
+    }
+    .play {
+      align-self: flex-start; display: inline-flex; align-items: center; gap: 8px;
+      font: 600 1.05rem/1 "Fredoka", sans-serif; color: #fff; background: var(--accent);
+      padding: 12px 20px; border-radius: 999px;
+    }
+    .play span { transition: transform .18s ease; }
+    .card:hover .play span { transform: translateX(4px); }
+
+    .c1 { --accent: var(--c1); } .c2 { --accent: var(--c2); } .c3 { --accent: #2f9e44; }
+    .c4 { --accent: #e67700; } .c5 { --accent: #7950f2; } .c6 { --accent: #e8590c; }
+
+    footer { text-align: center; color: var(--ink-soft); font-size: .9rem; padding: 0 0 40px; }
+    footer p { margin: 4px 0; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .card, .icon, .play span { transition: none; }
+      .card:hover, .card:focus-visible, .card:hover .icon { transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="bubbles" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>A</span></div>
+      <h1>Børnenes Spil</h1>
+      <p class="lead">Små, glade spil om tal, terninger og bogstaver. De virker på mobil og iPad – og kan lægges på hjemmeskærmen som en app.</p>
+    </header>
+
+    <main class="grid">
+      <a class="card c1" href="countthedice/">
+        <div class="top">
+          <img class="icon" src="billeder/countthedice.png" alt="" width="88" height="88" />
+          <h2>Tæl terningerne<span class="orig">Count the Dice</span></h2>
+        </div>
+        <p>Terningerne trilles, og barnet tæller øjnene og trykker på den rigtige sum blandt ti tal. Et rigtigt svar giver konfetti og en stjerne – et forkert giver bare et venligt „prøv igen“.</p>
+        <ul class="tags"><li>Tælle</li><li>Plus</li><li>3 niveauer</li></ul>
+        <span class="play">Spil <span>➜</span></span>
+      </a>
+
+      <a class="card c2" href="fridatal/">
+        <div class="top">
+          <img class="icon" src="billeder/fridatal.png" alt="" width="88" height="88" />
+          <h2>FridaTal<span class="orig">Før og efter</span></h2>
+        </div>
+        <p>Et tal mellem 2 og 19 bliver vist, og barnet skal finde tallet lige <em>før</em> og lige <em>efter</em> på en plade med tallene 1–20. Glad lyd, når begge er rigtige.</p>
+        <ul class="tags"><li>Talrækken</li><li>1–20</li></ul>
+        <span class="play">Spil <span>➜</span></span>
+      </a>
+
+      <a class="card c3" href="numbertowers/">
+        <div class="top">
+          <img class="icon" src="billeder/numbertowers.png" alt="" width="88" height="88" />
+          <h2>Taltårne<span class="orig">Number Towers</span></h2>
+        </div>
+        <p>Byg fire farverige tårne fra 1 til 10. Find klodsen med den rigtige farve og det næste tal – hver etage spiller en tone højere. Med hjælpeknap og stopur.</p>
+        <ul class="tags"><li>Tælle til 10</li><li>Farver</li><li>Stopur</li></ul>
+        <span class="play">Spil <span>➜</span></span>
+      </a>
+
+      <a class="card c4" href="numbertrainer/">
+        <div class="top">
+          <img class="icon" src="billeder/numbertrainer.png" alt="" width="88" height="88" />
+          <h2>Taltræner<span class="orig">Number Trainer</span></h2>
+        </div>
+        <p>Lær tallene 0–99 på dansk eller engelsk med indtalte lyde. Se tallet og sig det højt, før svaret kommer – eller hør tallet og gæt, hvordan det ser ud.</p>
+        <ul class="tags"><li>0–99</li><li>Dansk og engelsk</li><li>Lyd</li></ul>
+        <span class="play">Spil <span>➜</span></span>
+      </a>
+
+      <a class="card c5" href="stavemester/">
+        <div class="top">
+          <img class="icon" src="billeder/stavemester.png" alt="" width="88" height="88" />
+          <h2>Stavemester<span class="orig">Stavespil</span></h2>
+        </div>
+        <p>Et billede vises med en kasse til hvert bogstav, og barnet staver ordet på et stort tastatur med A–Å. Spørgsmålstegnet viser næste bogstav, og et færdigt ord giver hurra.</p>
+        <ul class="tags"><li>Stavning</li><li>5–6 år</li><li>2 niveauer</li></ul>
+        <span class="play">Spil <span>➜</span></span>
+      </a>
+
+      <a class="card c6" href="whoisbiggest/">
+        <div class="top">
+          <img class="icon" src="billeder/whoisbiggest.png" alt="" width="88" height="88" />
+          <h2>Hvem er størst?<span class="orig">Who Is Biggest?</span></h2>
+        </div>
+        <p>To tal står på store kort – tryk på det største! Rigtigt svar giver stjerne, krone, konfetti og fanfare. Fire niveauer, fra 1–12 og helt op til 99.</p>
+        <ul class="tags"><li>Sammenligne tal</li><li>1–99</li><li>4 niveauer</li></ul>
+        <span class="play">Spil <span>➜</span></span>
+      </a>
+    </main>
+
+    <footer>
+      <p>Lavet med kærlighed til de små 💛</p>
+    </footer>
+  </div>
+</body>
+</html>

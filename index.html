@@ -107,6 +107,19 @@
     .c1 { --accent: var(--c1); } .c2 { --accent: var(--c2); } .c3 { --accent: #2f9e44; }
     .c4 { --accent: #e67700; } .c5 { --accent: #7950f2; } .c6 { --accent: #e8590c; }
 
+    .hint {
+      display: flex; align-items: flex-start; gap: 12px; max-width: 34rem; margin: 22px auto 0;
+      padding: 14px 16px; text-align: left; background: var(--surface); border: 1px solid var(--line);
+      border-left: 6px solid var(--c2); border-radius: 18px; box-shadow: var(--shadow);
+    }
+    .hint[hidden] { display: none; }
+    .hint p { margin: 0; flex: 1; }
+    .hint svg { width: 1.1em; height: 1.1em; vertical-align: -.15em; color: var(--c2); }
+    .hint button {
+      flex: none; border: 0; background: none; color: var(--ink-soft); font-size: 1.4rem;
+      line-height: 1; padding: 2px 4px; cursor: pointer;
+    }
+
     footer { text-align: center; color: var(--ink-soft); font-size: .9rem; padding: 0 0 40px; }
     footer p { margin: 4px 0; }
 
@@ -122,6 +135,14 @@
       <div class="bubbles" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>A</span></div>
       <h1>Børnenes Spil</h1>
       <p class="lead">Små, glade spil om tal, terninger og bogstaver. De virker på mobil og iPad – og kan lægges på hjemmeskærmen som en app.</p>
+      <!-- Shown only in Safari on iPhone/iPad: a page opened from a link keeps Safari's bars,
+           while a game added to the home screen gets the whole screen. -->
+      <div class="hint" id="hint" hidden>
+        <p><strong>Hele skærmen på iPhone og iPad:</strong> åbn spillet, tryk på Del
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Del-knappen"><path d="M12 3v12M8 7l4-4 4 4M6 11H5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1h-1"/></svg>
+          og vælg <strong>Føj til hjemmeskærm</strong>. Så starter det som en app uden Safaris adresselinje og værktøjslinje.</p>
+        <button type="button" id="hint-close" aria-label="Luk">×</button>
+      </div>
     </header>
 
     <main class="grid">
@@ -135,7 +156,7 @@
         <span class="play">Spil <span>➜</span></span>
       </a>
 
-      <a class="card c2" href="fridatal/">
+      <a class="card c2" href="/fridatal/">
         <div class="top">
           <img class="icon" src="billeder/fridatal.png" alt="" width="88" height="88" />
           <h2>FridaTal<span class="orig">Før og efter</span></h2>
@@ -190,5 +211,24 @@
       <p>Lavet med kærlighed 💛 (c) 2026 Per Hejndorf</p>
     </footer>
   </div>
+  <script>
+    (function () {
+      var ua = navigator.userAgent;
+      // iPadOS reports itself as a Mac, so also check for touch
+      var ios = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+      var standalone = navigator.standalone || matchMedia("(display-mode: standalone)").matches;
+      var key = "forside-hint-closed";
+      var closed = false;
+      try { closed = localStorage.getItem(key) === "1"; } catch (e) { }
+      if (!ios || standalone || closed) return;
+
+      var hint = document.getElementById("hint");
+      hint.hidden = false;
+      document.getElementById("hint-close").addEventListener("click", function () {
+        hint.hidden = true;
+        try { localStorage.setItem(key, "1"); } catch (e) { }
+      });
+    })();
+  </script>
 </body>
 </html>

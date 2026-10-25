@@ -1,6 +1,6 @@
 # Forside
 
-Statisk forside med links til spillene (`countthedice/`, `fridatal/`, `numbertowers/`,
+Statisk forside med links til spillene (`clockmaster/`, `countthedice/`, `fridatal/`, `numbertowers/`,
 `numbertrainer/`, `stavemester/`, `whoisbiggest/`). Ingen build.
 
 ## Deploy til FTP

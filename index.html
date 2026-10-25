@@ -106,6 +106,7 @@
 
     .c1 { --accent: var(--c1); } .c2 { --accent: var(--c2); } .c3 { --accent: #2f9e44; }
     .c4 { --accent: #e67700; } .c5 { --accent: #7950f2; } .c6 { --accent: #e8590c; }
+    .c7 { --accent: #1c7ed6; }
 
     .hint {
       display: flex; align-items: flex-start; gap: 12px; max-width: 34rem; margin: 22px auto 0;
@@ -134,7 +135,7 @@
     <header>
       <div class="bubbles" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>A</span></div>
       <h1>Børnenes Spil</h1>
-      <p class="lead">Små, glade spil om tal, terninger og bogstaver. De virker på mobil og iPad – og kan lægges på hjemmeskærmen som en app.</p>
+      <p class="lead">Små, glade spil om tal, terninger, bogstaver og klokken. De virker på mobil og iPad – og kan lægges på hjemmeskærmen som en app.</p>
       <!-- Shown only in Safari on iPhone/iPad: a page opened from a link keeps Safari's bars,
            while a game added to the home screen gets the whole screen. -->
       <div class="hint" id="hint" hidden>
@@ -146,6 +147,16 @@
     </header>
 
     <main class="grid">
+      <a class="card c7" href="/clockmaster/">
+        <div class="top">
+          <img class="icon" src="billeder/clockmaster.png" alt="" width="88" height="88" />
+          <h2>Ur-mester<span class="orig">ClockMaster</span></h2>
+        </div>
+        <p>Et klokkeslæt vises med tal og med ord – fx „kvart i fire“ eller „femten femogfyrre“. Stil uret med den lille røde timeviser og den store blå minutviser, og tryk Tjek. Rigtigt svar giver stjerne og fanfare.</p>
+        <ul class="tags"><li>Klokken</li><li>24 timer</li><li>Hele 5 minutter</li></ul>
+        <span class="play">Spil <span>➜</span></span>
+      </a>
+
       <a class="card c1" href="/countthedice/">
         <div class="top">
           <img class="icon" src="billeder/countthedice.png" alt="" width="88" height="88" />

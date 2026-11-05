@@ -1,5 +1,11 @@
 # Forside
 
+![Static HTML](https://img.shields.io/badge/site-static%20HTML-lightgrey)
+
+![Børnenes Spil: forsiden til syv små spil](images/banner.png)
+
+**Forsiden til syv små spil.**
+
 Statisk forside med links til spillene (`clockmaster/`, `countthedice/`, `fridatal/`, `numbertowers/`,
 `numbertrainer/`, `stavemester/`, `whoisbiggest/`). Ingen build.
 

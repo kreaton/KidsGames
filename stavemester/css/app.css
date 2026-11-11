@@ -1,0 +1,571 @@
+:root {
+    --bg-top: #9fd8ff;
+    --bg-bottom: #fff3a3;
+    --ink: #3b2a63;
+    --card: #ffffff;
+    --shadow: 0 0.35rem 0 rgba(59, 42, 99, 0.25);
+    --shadow-pressed: 0 0.1rem 0 rgba(59, 42, 99, 0.25);
+    --purple: #845ef7;
+    --pink: #f06595;
+    --orange: #ff922b;
+    --green: #40c057;
+    --blue: #228be6;
+    --red: #fa5252;
+    --yellow: #fcc419;
+    font-family: "Fredoka", "Baloo 2", "Comic Sans MS", system-ui, sans-serif;
+    color: var(--ink);
+}
+
+/*
+ * Everything below is sized in rem, and the rem itself scales with the screen so the
+ * whole game always fits without scrolling. The portrait layout is about 42rem wide
+ * and 52rem tall, so 1rem is the smaller of (width / 42) and (height / 52).
+ */
+html {
+    font-size: 16px;
+    font-size: clamp(7px, min(100vw / 42, 100vh / 52), 30px);
+    font-size: clamp(7px, min(100vw / 42, 100dvh / 52), 30px);
+}
+
+/* Wide screens move the levels into a column beside the game: about 58rem by 46rem. */
+@media (min-aspect-ratio: 4/3) {
+    html {
+        font-size: clamp(7px, min(100vw / 58, 100vh / 46), 30px);
+        font-size: clamp(7px, min(100vw / 58, 100dvh / 46), 30px);
+    }
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+    margin: 0;
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    background:
+        radial-gradient(circle at 12% 15%, rgba(255,255,255,.55) 0 2.5rem, transparent calc(2.5rem + 1px)),
+        radial-gradient(circle at 88% 22%, rgba(255,255,255,.45) 0 1.75rem, transparent calc(1.75rem + 1px)),
+        radial-gradient(circle at 75% 88%, rgba(255,255,255,.35) 0 3rem, transparent calc(3rem + 1px)),
+        radial-gradient(circle at 20% 80%, rgba(255,255,255,.3) 0 1.5rem, transparent calc(1.5rem + 1px)),
+        linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
+    background-attachment: fixed;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+button {
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    border: none;
+}
+
+button:disabled { cursor: default; }
+
+/* ---------- Layout ---------- */
+
+.game {
+    width: 42rem;
+    max-width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    margin: 0 auto;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "title"
+        "levels"
+        "play"
+        "credits";
+    align-content: center;
+    gap: 0.9rem;
+}
+
+.title   { grid-area: title; }
+.levels  { grid-area: levels; }
+.play    { grid-area: play; }
+.credits { grid-area: credits; }
+
+@media (min-aspect-ratio: 4/3) {
+    .game {
+        width: 58rem;
+        grid-template-columns: 12rem 1fr;
+        grid-template-areas:
+            "title title"
+            "levels play"
+            "credits credits";
+        column-gap: 1.5rem;
+    }
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.title h1 {
+    margin: 0;
+    font-size: 2.6rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.06rem;
+    text-shadow: 0 0.2rem 0 var(--purple), 0 0.4rem 0 rgba(59, 42, 99, .25);
+    white-space: nowrap;
+}
+
+.title-buttons {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.stars, .sound-btn {
+    background: var(--card);
+    border-radius: 999px;
+    padding: 0.4rem 1rem;
+    font-size: 1.4rem;
+    font-weight: 700;
+    box-shadow: var(--shadow);
+    white-space: nowrap;
+}
+
+.sound-btn { padding: 0.4rem 0.7rem; }
+.sound-btn:active { transform: translateY(0.25rem); box-shadow: var(--shadow-pressed); }
+
+/* ---------- Level picker ---------- */
+
+.levels {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+}
+
+.level-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5rem 0.3rem;
+    border-radius: 1.25rem;
+    background: var(--card);
+    font-size: 1.15rem;
+    font-weight: 700;
+    box-shadow: var(--shadow);
+    transition: transform .1s, box-shadow .1s, background .2s;
+}
+
+.level-btn small {
+    font-size: .8rem;
+    font-weight: 500;
+    opacity: .75;
+    white-space: nowrap;
+}
+
+.level-btn:active { transform: translateY(0.25rem); box-shadow: var(--shadow-pressed); }
+.level-btn.active { color: #fff; }
+.level-1.active { background: var(--green); }
+.level-2.active { background: var(--purple); }
+
+@media (min-aspect-ratio: 4/3) {
+    .levels {
+        grid-template-columns: 1fr;
+        align-content: center;
+    }
+
+    .level-btn { padding: 0.9rem 0.4rem; }
+}
+
+/* ---------- Picture ---------- */
+
+.play {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9rem;
+}
+
+.load-error {
+    margin: 2rem 0;
+    padding: 1rem 1.5rem;
+    border-radius: 1.25rem;
+    background: var(--card);
+    font-size: 1.4rem;
+    box-shadow: var(--shadow);
+}
+
+.start-btn {
+    margin: 6rem 0;
+    padding: 1.2rem 3.5rem;
+    border-radius: 999px;
+    background: var(--green);
+    color: #fff;
+    font-size: 3rem;
+    font-weight: 700;
+    box-shadow: 0 0.5rem 0 #2b8a3e;
+    animation: wiggle 1.6s ease-in-out infinite;
+}
+
+.start-btn:active { transform: translateY(0.35rem); box-shadow: 0 0.15rem 0 #2b8a3e; }
+
+/* The picture is a square card; photos of any shape are scaled to fit inside it, uncropped. */
+.picture {
+    --pic: 14rem;
+    position: relative;
+    width: var(--pic);
+    height: var(--pic);
+    padding: 0.6rem;
+    border-radius: 2rem;
+    background: var(--card);
+    box-shadow: 0 0.6rem 0 rgba(59, 42, 99, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: deal .4s ease-out backwards;
+}
+
+.picture .emoji {
+    font-size: calc(var(--pic) * 0.7);
+    line-height: 1;
+}
+
+.picture img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 1.5rem;
+}
+
+.say-btn {
+    position: absolute;
+    right: -1rem;
+    bottom: -0.8rem;
+    width: 3.4rem;
+    height: 3.4rem;
+    border-radius: 50%;
+    background: var(--yellow);
+    font-size: 1.7rem;
+    box-shadow: var(--shadow);
+}
+
+.say-btn:active { transform: translateY(0.25rem); box-shadow: var(--shadow-pressed); }
+
+@media (min-aspect-ratio: 4/3) {
+    .picture { --pic: 13rem; }
+}
+
+/*
+ * Tall phones: let the picture and the keys grow into the spare height. Everything else
+ * in the portrait layout takes about 24rem; the picture gets 40% of the rest, the keys 60%.
+ */
+@media (max-aspect-ratio: 4/3) {
+    .picture {
+        --pic: clamp(14rem, (100vh - 24rem) * 0.4, 24rem);
+        --pic: clamp(14rem, (100dvh - 24rem) * 0.4, 24rem);
+    }
+
+    .keyboard .key {
+        height: clamp(4.3rem, (100vh - 24rem) * 0.6 / 3, 7rem);
+        height: clamp(4.3rem, (100dvh - 24rem) * 0.6 / 3, 7rem);
+    }
+}
+
+/* ---------- Letter boxes ---------- */
+
+.word-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+}
+
+.boxes {
+    --size: min(4.6rem, (30rem - (var(--letters) - 1) * 0.5rem) / var(--letters));
+    display: flex;
+    gap: 0.5rem;
+}
+
+.box {
+    width: var(--size);
+    height: calc(var(--size) * 1.15);
+    border-radius: 0.9rem;
+    background: rgba(255, 255, 255, .7);
+    border: 0.2rem dashed rgba(59, 42, 99, .35);
+    display: grid;
+    place-items: center;
+    font-size: calc(var(--size) * 0.75);
+    font-weight: 700;
+    line-height: 1;
+}
+
+.box.current {
+    border-style: solid;
+    border-color: var(--purple);
+    background: var(--card);
+    animation: blink 1.2s ease-in-out infinite;
+}
+
+.box.filled, .box.given {
+    border: none;
+    background: var(--card);
+    color: var(--blue);
+    box-shadow: var(--shadow);
+    animation: pop .3s ease-out;
+}
+
+.box.given { color: var(--ink); background: #e7f5ff; animation: none; }
+
+.box.hint {
+    color: rgba(132, 94, 247, .55);
+    animation: blink 1.2s ease-in-out infinite;
+}
+
+.boxes.solved .box {
+    background: var(--green);
+    color: #fff;
+    animation: hop .5s ease-out backwards;
+    animation-delay: calc(var(--i) * 0.07s);
+}
+
+.hint-btn {
+    flex: none;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background: var(--orange);
+    color: #fff;
+    font-size: 2.4rem;
+    font-weight: 700;
+    box-shadow: 0 0.35rem 0 #d9480f;
+}
+
+.hint-btn:active { transform: translateY(0.25rem); box-shadow: 0 0.1rem 0 #d9480f; }
+.hint-btn:disabled { opacity: .35; }
+
+/* ---------- Feedback ---------- */
+
+/* Space is reserved up front so the page never jumps when a message appears. */
+.feedback {
+    min-height: 4.2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.message {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.5rem 1.4rem;
+    border-radius: 999px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    box-shadow: var(--shadow);
+    animation: bounce-in .45s ease-out;
+}
+
+.message.success { background: var(--green); }
+.message.try-again { background: var(--red); }
+
+.big-emoji { font-size: 1.4em; line-height: 1; }
+
+.next-btn {
+    padding: 0.6rem 2rem;
+    border-radius: 999px;
+    background: var(--purple);
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 700;
+    box-shadow: 0 0.35rem 0 #5f3dc4;
+    animation: wiggle 1.6s ease-in-out infinite;
+}
+
+.next-btn:active { transform: translateY(0.25rem); box-shadow: 0 0.1rem 0 #5f3dc4; }
+
+/* ---------- Keyboard ---------- */
+
+.keyboard {
+    --gap: 0.5rem;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--gap);
+    transition: opacity .3s;
+}
+
+.keyboard.done { opacity: .4; }
+
+.key {
+    width: calc((100% - 9 * var(--gap)) / 10);
+    height: 4.3rem;
+    border-radius: 0.9rem;
+    background: var(--card);
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 1;
+    box-shadow: var(--shadow);
+    transition: transform .08s, box-shadow .08s, background .2s;
+}
+
+.key:not(:disabled):active {
+    transform: translateY(0.25rem);
+    box-shadow: var(--shadow-pressed);
+    background: #e7f5ff;
+}
+
+.key.wrong {
+    background: var(--red);
+    color: #fff;
+    animation: shake .4s;
+}
+
+.key.hint {
+    background: var(--yellow);
+    animation: pulse 0.9s ease-in-out infinite;
+}
+
+@media (min-aspect-ratio: 4/3) {
+    .key { height: 4rem; }
+}
+
+/* ---------- Credits ---------- */
+
+.credits {
+    text-align: center;
+    font-size: 0.75rem;
+    opacity: .6;
+}
+
+/* ---------- Animations ---------- */
+
+@keyframes deal {
+    0%   { transform: scale(.6) rotate(-6deg); opacity: 0; }
+    70%  { transform: scale(1.05); opacity: 1; }
+    100% { transform: scale(1); }
+}
+
+@keyframes shake {
+    0%, 100% { translate: 0; }
+    20% { translate: -0.4rem; }
+    40% { translate: 0.4rem; }
+    60% { translate: -0.3rem; }
+    80% { translate: 0.3rem; }
+}
+
+@keyframes pop {
+    0%   { transform: scale(.5); }
+    60%  { transform: scale(1.15); }
+    100% { transform: scale(1); }
+}
+
+@keyframes hop {
+    0%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-1rem) rotate(-6deg); }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: .55; }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.12); }
+}
+
+@keyframes bounce-in {
+    0%   { transform: scale(.3); opacity: 0; }
+    60%  { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); }
+}
+
+@keyframes wiggle {
+    0%, 70%, 100% { rotate: 0deg; }
+    75% { rotate: -4deg; }
+    85% { rotate: 4deg; }
+    95% { rotate: -2deg; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; }
+}
+
+/* ---------- Blazor template bits ---------- */
+
+#blazor-error-ui {
+    color-scheme: light only;
+    background: lightyellow;
+    bottom: 0;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    display: none;
+    left: 0;
+    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+    #blazor-error-ui .dismiss {
+        cursor: pointer;
+        position: absolute;
+        right: 0.75rem;
+        top: 0.5rem;
+    }
+
+.blazor-error-boundary {
+    background: #b32121;
+    padding: 1rem;
+    color: white;
+}
+
+    .blazor-error-boundary::after {
+        content: "Der opstod en fejl."
+    }
+
+.loading-progress {
+    position: absolute;
+    display: block;
+    width: 8rem;
+    height: 8rem;
+    inset: 20vh 0 auto 0;
+    margin: 0 auto 0 auto;
+}
+
+    .loading-progress circle {
+        fill: none;
+        stroke: rgba(255, 255, 255, .6);
+        stroke-width: 0.6rem;
+        transform-origin: 50% 50%;
+        transform: rotate(-90deg);
+    }
+
+        .loading-progress circle:last-child {
+            stroke: var(--purple);
+            stroke-dasharray: calc(3.141 * var(--blazor-load-percentage, 0%) * 0.8), 500%;
+            transition: stroke-dasharray 0.05s ease-in-out;
+        }
+
+.loading-progress-text {
+    position: absolute;
+    text-align: center;
+    font-weight: bold;
+    inset: calc(20vh + 3.25rem) 0 auto 0.2rem;
+}
+
+    .loading-progress-text:after {
+        content: var(--blazor-load-percentage-text, "Indlæser");
+    }

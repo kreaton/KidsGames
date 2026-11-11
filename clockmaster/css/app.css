@@ -1,0 +1,295 @@
+:root {
+    --bg-top: #a5d8ff;
+    --bg-bottom: #fff3a3;
+    --ink: #3b2a63;
+    --card: #ffffff;
+    --shadow: 0 0.35rem 0 rgba(59, 42, 99, 0.25);
+    --shadow-pressed: 0 0.1rem 0 rgba(59, 42, 99, 0.25);
+    --purple: #845ef7;
+    --blue: #228be6;
+    --red: #fa5252;
+    --green: #40c057;
+    --orange: #ff922b;
+    font-family: "Fredoka", "Baloo 2", "Comic Sans MS", system-ui, sans-serif;
+    color: var(--ink);
+}
+
+/* The portrait layout is about 30rem by 56rem, so the rem scales to fit it on screen. */
+html {
+    font-size: 16px;
+    font-size: clamp(7px, min(100vw / 30, 100dvh / 56), 30px);
+}
+
+/* Wide screens put the panel beside the clock: about 48rem by 40rem. */
+@media (min-aspect-ratio: 4/3) {
+    html { font-size: clamp(7px, min(100vw / 48, 100dvh / 40), 30px); }
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; min-height: 100%; }
+
+body {
+    min-height: 100dvh;
+    background: linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
+    background-attachment: fixed;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+button { font: inherit; color: inherit; cursor: pointer; border: none; }
+button:disabled { cursor: default; }
+
+/* ---------- Layout ---------- */
+
+.clock-page {
+    min-height: 100dvh;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.title {
+    width: 100%;
+    max-width: 46rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.title h1 {
+    margin: 0;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.06rem;
+    text-shadow: 0 0.2rem 0 var(--purple), 0 0.4rem 0 rgba(59, 42, 99, .25);
+    white-space: nowrap;
+}
+
+.title-buttons { display: flex; align-items: center; gap: 0.6rem; }
+
+.stars, .sound-btn {
+    background: var(--card);
+    border-radius: 999px;
+    padding: 0.4rem 1rem;
+    font-size: 1.4rem;
+    font-weight: 700;
+    box-shadow: var(--shadow);
+    white-space: nowrap;
+}
+
+.sound-btn { padding: 0.4rem 0.7rem; }
+.sound-btn:active { transform: translateY(0.25rem); box-shadow: var(--shadow-pressed); }
+
+.play {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+}
+
+@media (min-aspect-ratio: 4/3) {
+    .play { flex-direction: row; gap: 2rem; }
+}
+
+/* ---------- Clock ---------- */
+
+.clock {
+    width: 26rem;
+    height: 26rem;
+    filter: drop-shadow(0 0.35rem 0 rgba(59, 42, 99, 0.25));
+}
+
+.face { fill: var(--card); stroke: var(--ink); stroke-width: 3; }
+
+.hour-number {
+    fill: var(--ink);
+    font-size: 15px;
+    font-weight: 700;
+    text-anchor: middle;
+    dominant-baseline: central;
+    pointer-events: none;
+}
+
+.dot { cursor: pointer; }
+.dot .hit { fill: transparent; }
+.dot .mark { transition: r 0.15s, fill 0.15s; }
+
+.minute-dot .mark { fill: var(--blue); }
+.minute-dot.selected .mark { fill: #1864ab; r: 5.5px; }
+
+.hour-dot .mark { fill: #ff8787; }
+.hour-dot.selected .mark { fill: #c92a2a; r: 3.4px; }
+
+@media (hover: hover) {
+    .minute-dot:hover .mark { fill: #1864ab; }
+    .hour-dot:hover .mark { fill: #c92a2a; }
+}
+
+/* Once solved the dots stop reacting, so it is clear the round is over. */
+.clock.solved .dot { cursor: default; pointer-events: none; }
+
+.hand {
+    stroke-linecap: round;
+    pointer-events: none;
+    transform-origin: 0 0;
+    transition: transform 0.25s ease-out;
+}
+
+.hour-hand { stroke: var(--red); stroke-width: 5; }
+.minute-hand { stroke: var(--blue); stroke-width: 7; }
+
+.centre { fill: var(--ink); pointer-events: none; }
+
+/* ---------- Panel ---------- */
+
+.panel {
+    width: 16rem;
+    padding: 1rem;
+    border-radius: 1.25rem;
+    background: var(--card);
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    text-align: center;
+}
+
+.question { margin: 0; font-size: 1.3rem; }
+
+.target {
+    font-size: 3.6rem;
+    font-weight: 700;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    color: var(--purple);
+    animation: bounce-in .45s ease-out;
+}
+
+/* Room for two lines, so a long text like "5 minutter over halv fire" doesn't move the buttons. */
+.target-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3.6rem;
+    margin-top: 0.4rem;
+    font-size: 1.5rem;
+    line-height: 1.2;
+    color: var(--ink);
+}
+
+.big-btn {
+    padding: 0.7rem;
+    border-radius: 999px;
+    color: #fff;
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.check-btn { background: var(--green); box-shadow: 0 0.35rem 0 #2b8a3e; }
+.next-btn { background: var(--purple); box-shadow: 0 0.35rem 0 #5f3dc4; animation: wiggle 1.6s ease-in-out infinite; }
+.big-btn:active { transform: translateY(0.25rem); box-shadow: var(--shadow-pressed); }
+
+/* ---------- Feedback ---------- */
+
+/* Space is reserved up front so the page never jumps when a message appears. */
+.feedback { min-height: 4rem; display: flex; align-items: center; justify-content: center; }
+
+.message {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.6rem 1.4rem;
+    border-radius: 999px;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    box-shadow: var(--shadow);
+}
+
+.message.success { background: var(--green); animation: bounce-in .45s ease-out; }
+.message.try-again { background: var(--orange); animation: shake .45s ease-out; }
+
+.big-emoji { font-size: 1.4em; line-height: 1; }
+
+@keyframes bounce-in {
+    0%   { transform: scale(.3); opacity: 0; }
+    60%  { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); }
+}
+
+@keyframes shake {
+    0%, 100% { translate: 0; }
+    20% { translate: -0.6rem; }
+    40% { translate: 0.6rem; }
+    60% { translate: -0.4rem; }
+    80% { translate: 0.4rem; }
+}
+
+@keyframes wiggle {
+    0%, 70%, 100% { rotate: 0deg; }
+    75% { rotate: -4deg; }
+    85% { rotate: 4deg; }
+    95% { rotate: -2deg; }
+}
+
+.credits { font-size: 0.75rem; opacity: 0.6; text-align: center; }
+
+/* ---------- Blazor boilerplate ---------- */
+
+#blazor-error-ui {
+    color-scheme: light only;
+    background: lightyellow;
+    bottom: 0;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+    display: none;
+    left: 0;
+    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+#blazor-error-ui .dismiss { cursor: pointer; position: absolute; right: 0.75rem; top: 0.5rem; }
+
+.loading-progress {
+    position: absolute;
+    display: block;
+    width: 8rem;
+    height: 8rem;
+    inset: 20vh 0 auto 0;
+    margin: 0 auto;
+}
+
+.loading-progress circle {
+    fill: none;
+    stroke: rgba(255, 255, 255, .6);
+    stroke-width: 0.6rem;
+    transform-origin: 50% 50%;
+    transform: rotate(-90deg);
+}
+
+.loading-progress circle:last-child {
+    stroke: var(--purple);
+    stroke-dasharray: calc(3.141 * var(--blazor-load-percentage, 0%) * 0.8), 500%;
+    transition: stroke-dasharray 0.05s ease-in-out;
+}
+
+.loading-progress-text {
+    position: absolute;
+    text-align: center;
+    font-weight: bold;
+    inset: calc(20vh + 3.25rem) 0 auto 0.2rem;
+}
+
+.loading-progress-text:after { content: var(--blazor-load-percentage-text, "Indlæser"); }

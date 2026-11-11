@@ -1,0 +1,450 @@
+:root {
+    --bg-top: #8fd3ff;
+    --bg-bottom: #ffe08a;
+    --ink: #3b2a63;
+    --card: #ffffff;
+    --shadow: 0 0.35rem 0 rgba(59, 42, 99, 0.25);
+    --shadow-pressed: 0 0.1rem 0 rgba(59, 42, 99, 0.25);
+    --purple: #845ef7;
+    --pink: #f06595;
+    --orange: #ff922b;
+    --green: #40c057;
+    --red: #fa5252;
+    font-family: "Fredoka", "Baloo 2", "Comic Sans MS", system-ui, sans-serif;
+    color: var(--ink);
+}
+
+/*
+ * Everything below is sized in rem, and the rem itself scales with the screen so the
+ * whole game always fits without scrolling. The portrait layout is about 42rem wide
+ * and 54rem tall, so 1rem is the smaller of (width / 42) and (height / 54).
+ */
+html {
+    font-size: 16px;
+    font-size: clamp(7px, min(100vw / 42, 100vh / 54), 28px);
+    font-size: clamp(7px, min(100vw / 42, 100dvh / 54), 28px);
+}
+
+/* Wide screens put the dice beside the answers: about 76rem wide and 40rem tall. */
+@media (min-aspect-ratio: 5/4) {
+    html {
+        font-size: clamp(7px, min(100vw / 76, 100vh / 40.5), 28px);
+        font-size: clamp(7px, min(100vw / 76, 100dvh / 40.5), 28px);
+    }
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+    margin: 0;
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    background:
+        radial-gradient(circle at 15% 12%, rgba(255,255,255,.55) 0 2.5rem, transparent calc(2.5rem + 1px)),
+        radial-gradient(circle at 85% 20%, rgba(255,255,255,.45) 0 1.75rem, transparent calc(1.75rem + 1px)),
+        radial-gradient(circle at 70% 85%, rgba(255,255,255,.35) 0 3rem, transparent calc(3rem + 1px)),
+        linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
+    background-attachment: fixed;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+button {
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    border: none;
+}
+
+button:disabled { cursor: default; }
+
+/* ---------- Layout ---------- */
+
+.game {
+    width: 42rem;
+    max-width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    margin: 0 auto;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "title"
+        "levels"
+        "tray"
+        "answers"
+        "credits";
+    align-content: center;
+    gap: 1rem;
+}
+
+.title   { grid-area: title; }
+.levels  { grid-area: levels; }
+.dice-tray { grid-area: tray; }
+.answers { grid-area: answers; }
+.credits { grid-area: credits; }
+
+@media (min-aspect-ratio: 5/4) {
+    .game {
+        width: 76rem;
+        grid-template-columns: 30rem 1fr;
+        grid-template-areas:
+            "title title"
+            "levels levels"
+            "tray answers"
+            "credits credits";
+        column-gap: 1.5rem;
+    }
+
+    .levels { width: 42rem; justify-self: center; }
+    .dice-tray { flex-wrap: wrap; align-content: center; }
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.title h1 {
+    margin: 0;
+    font-size: 2.6rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.06rem;
+    text-shadow: 0 0.2rem 0 var(--purple), 0 0.4rem 0 rgba(59, 42, 99, .25);
+}
+
+.stars {
+    background: var(--card);
+    border-radius: 999px;
+    padding: 0.4rem 1rem;
+    font-size: 1.4rem;
+    font-weight: 700;
+    box-shadow: var(--shadow);
+    white-space: nowrap;
+}
+
+.title-right {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.sound-btn {
+    width: 2.9rem;
+    height: 2.9rem;
+    border-radius: 50%;
+    background: var(--card);
+    font-size: 1.4rem;
+    line-height: 1;
+    box-shadow: var(--shadow);
+}
+
+.sound-btn:active { transform: translateY(0.25rem); box-shadow: var(--shadow-pressed); }
+
+/* ---------- Level picker ---------- */
+
+.levels {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.6rem;
+}
+
+.level-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.6rem 0.4rem;
+    border-radius: 1.25rem;
+    background: var(--card);
+    font-size: 1.15rem;
+    font-weight: 700;
+    box-shadow: var(--shadow);
+    transition: transform .1s, box-shadow .1s, background .2s;
+}
+
+.level-btn small {
+    font-size: .8rem;
+    font-weight: 500;
+    opacity: .75;
+}
+
+.level-btn:active { transform: translateY(0.25rem); box-shadow: var(--shadow-pressed); }
+.level-btn.active { color: #fff; }
+.level-1.active { background: var(--green); }
+.level-2.active { background: var(--orange); }
+.level-3.active { background: var(--pink); }
+
+/* ---------- Dice ---------- */
+
+.dice-tray {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, .55);
+    border: 0.25rem dashed rgba(255, 255, 255, .9);
+    border-radius: 2rem;
+    cursor: pointer;
+}
+
+.die {
+    --size: 7.5rem;
+    width: var(--size);
+    height: var(--size);
+    padding: calc(var(--size) * .13);
+    border-radius: calc(var(--size) * .2);
+    background: var(--die-color);
+    box-shadow:
+        inset 0 -0.5rem 0 rgba(0, 0, 0, .18),
+        inset 0 0.4rem 0 rgba(255, 255, 255, .35),
+        0 0.5rem 0 rgba(59, 42, 99, .25);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    place-items: center;
+    animation: land .35s ease-out;
+}
+
+.die.rolling { animation: tumble .14s linear infinite; }
+
+.pip {
+    width: 72%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+}
+
+.pip.on {
+    background: #fff;
+    box-shadow: inset 0 0.2rem 0 rgba(0, 0, 0, .2);
+}
+
+@keyframes tumble {
+    0%   { transform: rotate(-12deg) translateY(-0.4rem); }
+    50%  { transform: rotate(12deg) translateY(0.25rem); }
+    100% { transform: rotate(-12deg) translateY(-0.4rem); }
+}
+
+@keyframes land {
+    0%   { transform: scale(1.15); }
+    60%  { transform: scale(.95); }
+    100% { transform: scale(1); }
+}
+
+/* ---------- Question & choices ---------- */
+
+.answers {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.question {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.choices {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.65rem;
+}
+
+.choice {
+    aspect-ratio: 1;
+    border-radius: 1.4rem;
+    background: var(--card);
+    font-size: 2.6rem;
+    font-weight: 700;
+    color: var(--purple);
+    box-shadow: var(--shadow);
+    transition: transform .1s, box-shadow .1s, background .2s, color .2s;
+}
+
+.choice:not(:disabled):active {
+    transform: translateY(0.25rem);
+    box-shadow: var(--shadow-pressed);
+}
+
+.choice:nth-child(5n+1) { color: var(--red); }
+.choice:nth-child(5n+2) { color: var(--orange); }
+.choice:nth-child(5n+3) { color: var(--green); }
+.choice:nth-child(5n+4) { color: #228be6; }
+.choice:nth-child(5n+5) { color: var(--purple); }
+
+.choice.wrong {
+    background: #e9ecef;
+    color: #adb5bd !important;
+    box-shadow: none;
+    transform: translateY(0.25rem);
+    animation: shake .4s;
+}
+
+.choice.correct {
+    background: var(--green);
+    color: #fff !important;
+    animation: pop .5s ease-out;
+}
+
+.choices:has(.correct) .choice:not(.correct) { opacity: .45; }
+
+@keyframes shake {
+    0%, 100% { translate: 0; }
+    20% { translate: -0.5rem; }
+    40% { translate: 0.5rem; }
+    60% { translate: -0.4rem; }
+    80% { translate: 0.4rem; }
+}
+
+@keyframes pop {
+    0%   { transform: scale(1); }
+    40%  { transform: scale(1.3) rotate(-6deg); }
+    100% { transform: scale(1); }
+}
+
+/* ---------- Feedback ---------- */
+
+/* Space is reserved up front so the page never jumps when a message appears. */
+.feedback {
+    min-height: 8.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.message {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.6rem 1.4rem;
+    border-radius: 999px;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #fff;
+    box-shadow: var(--shadow);
+    animation: bounce-in .45s ease-out;
+}
+
+.message.success { background: var(--green); }
+.message.try-again { background: var(--orange); }
+
+.big-emoji { font-size: 1.4em; line-height: 1; }
+
+.roll-btn {
+    padding: 0.7rem 2rem;
+    border-radius: 999px;
+    background: var(--purple);
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 700;
+    box-shadow: 0 0.35rem 0 #5f3dc4;
+    animation: wiggle 1.6s ease-in-out infinite;
+}
+
+.roll-btn:active { transform: translateY(0.25rem); box-shadow: 0 0.1rem 0 #5f3dc4; }
+
+/* ---------- Credits ---------- */
+
+.credits {
+    text-align: center;
+    font-size: 0.75rem;
+    opacity: .6;
+}
+
+@keyframes bounce-in {
+    0%   { transform: scale(.3); opacity: 0; }
+    60%  { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); }
+}
+
+@keyframes wiggle {
+    0%, 70%, 100% { rotate: 0deg; }
+    75% { rotate: -4deg; }
+    85% { rotate: 4deg; }
+    95% { rotate: -2deg; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; }
+}
+
+/* ---------- Blazor template bits ---------- */
+
+#blazor-error-ui {
+    color-scheme: light only;
+    background: lightyellow;
+    bottom: 0;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    display: none;
+    left: 0;
+    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+    #blazor-error-ui .dismiss {
+        cursor: pointer;
+        position: absolute;
+        right: 0.75rem;
+        top: 0.5rem;
+    }
+
+.blazor-error-boundary {
+    background: #b32121;
+    padding: 1rem;
+    color: white;
+}
+
+    .blazor-error-boundary::after {
+        content: "Der opstod en fejl."
+    }
+
+.loading-progress {
+    position: absolute;
+    display: block;
+    width: 8rem;
+    height: 8rem;
+    inset: 20vh 0 auto 0;
+    margin: 0 auto 0 auto;
+}
+
+    .loading-progress circle {
+        fill: none;
+        stroke: rgba(255, 255, 255, .6);
+        stroke-width: 0.6rem;
+        transform-origin: 50% 50%;
+        transform: rotate(-90deg);
+    }
+
+        .loading-progress circle:last-child {
+            stroke: var(--purple);
+            stroke-dasharray: calc(3.141 * var(--blazor-load-percentage, 0%) * 0.8), 500%;
+            transition: stroke-dasharray 0.05s ease-in-out;
+        }
+
+.loading-progress-text {
+    position: absolute;
+    text-align: center;
+    font-weight: bold;
+    inset: calc(20vh + 3.25rem) 0 auto 0.2rem;
+}
+
+    .loading-progress-text:after {
+        content: var(--blazor-load-percentage-text, "Indlæser");
+    }

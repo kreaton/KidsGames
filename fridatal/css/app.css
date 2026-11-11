@@ -1,0 +1,286 @@
+* { box-sizing: border-box; }
+
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: "Comic Sans MS", "Chalkboard SE", "Trebuchet MS", system-ui, sans-serif;
+    color: #2b2d42;
+    background: linear-gradient(135deg, #ffe5ec 0%, #fff3b0 35%, #c8f7dc 70%, #cfe8ff 100%);
+    background-attachment: fixed;
+}
+
+.loading { padding: 3rem; text-align: center; font-size: 2rem; }
+
+.app-shell {
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ---------- Title ---------- */
+.title { text-align: center; margin-bottom: 1rem; }
+
+.title h1 {
+    margin: 0;
+    font-size: clamp(2.5rem, 7vw, 4.5rem);
+    letter-spacing: .05em;
+    text-shadow: 3px 3px 0 rgba(0,0,0,.12);
+}
+
+.title h1 span {
+    color: var(--c);
+    display: inline-block;
+    animation: bob 2.4s ease-in-out infinite;
+}
+.title h1 span:nth-child(2n) { animation-delay: .3s; }
+.title h1 span:nth-child(3n) { animation-delay: .6s; }
+
+.subtitle { margin: .25rem 0 0; font-size: clamp(1rem, 2.4vw, 1.4rem); }
+
+@keyframes bob {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-6px); }
+}
+
+/* ---------- Layout ---------- */
+.quiz {
+    width: 100%;
+    max-width: 1100px;
+    display: grid;
+    grid-template-columns: minmax(220px, 1fr) 2fr;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+@media (max-width: 700px) {
+    .quiz { grid-template-columns: 1fr; }
+}
+
+/* ---------- Target box ---------- */
+.target-box {
+    background: #fff;
+    border: 8px solid #ff4d6d;
+    border-radius: 32px;
+    box-shadow: 0 10px 0 #c9184a, 0 18px 30px rgba(0,0,0,.2);
+    padding: 1rem;
+    text-align: center;
+    background-image: radial-gradient(circle at 20% 20%, #fff0f3, #fff 60%);
+    /* lets .target-number size itself to the box width (cqi units) */
+    container-type: inline-size;
+}
+
+.target-label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #c9184a;
+}
+
+.target-number {
+    /* two digits are about 1.3em wide, so 60cqi keeps "20" inside the box */
+    font-size: min(13rem, 60cqi);
+    font-weight: 900;
+    line-height: 1.05;
+    background: linear-gradient(135deg, #ff4d6d, #ff9f1c, #8338ec);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(3px 4px 0 rgba(0,0,0,.15));
+}
+
+/* ---------- Grid ---------- */
+.right-side { display: flex; flex-direction: column; gap: 1.25rem; }
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: .75rem;
+}
+
+.tile {
+    aspect-ratio: 1 / 1;
+    font: inherit;
+    font-size: clamp(1.6rem, 4.5vw, 2.8rem);
+    font-weight: 800;
+    color: #fff;
+    border: none;
+    border-radius: 22px;
+    cursor: pointer;
+    text-shadow: 2px 2px 0 rgba(0,0,0,.2);
+    box-shadow: 0 6px 0 rgba(0,0,0,.25);
+    transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+}
+
+.tile:hover:not(:disabled) { transform: translateY(-3px) rotate(-2deg); filter: brightness(1.08); }
+.tile:active:not(:disabled) { transform: translateY(4px); box-shadow: 0 2px 0 rgba(0,0,0,.25); }
+
+.tile-0 { background: #ef476f; }
+.tile-1 { background: #f78c6b; }
+.tile-2 { background: #ffb703; }
+.tile-3 { background: #06d6a0; }
+.tile-4 { background: #118ab2; }
+.tile-5 { background: #8338ec; }
+.tile-6 { background: #ff5d8f; }
+.tile-7 { background: #2ec4b6; }
+.tile-8 { background: #3a86ff; }
+.tile-9 { background: #fb5607; }
+
+/* Lit up when clicked */
+.tile.selected {
+    background: #fff700;
+    color: #2b2d42;
+    text-shadow: none;
+    outline: 6px solid #fff;
+    box-shadow: 0 0 0 10px #ffbe0b, 0 0 35px 12px rgba(255, 221, 0, .9);
+    transform: scale(1.08);
+    animation: glow .9s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from { filter: brightness(1); }
+    to   { filter: brightness(1.15); }
+}
+
+.tile.locked:not(.selected) { opacity: .45; cursor: default; }
+.tile.locked.selected { cursor: default; }
+.tile:disabled { cursor: default; }
+
+/* ---------- Feedback ---------- */
+.feedback-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+}
+
+.message {
+    flex: 1 1 260px;
+    padding: .9rem 1.25rem;
+    border-radius: 20px;
+    font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+    font-weight: 800;
+    text-align: center;
+    box-shadow: 0 6px 0 rgba(0,0,0,.2);
+}
+
+.message.hint  { background: #ffffffb0; color: #6c757d; box-shadow: none; font-weight: 600; }
+.message.retry { background: #ffd166; color: #7a3e00; animation: shake .4s; }
+.message.success { background: #06d6a0; color: #fff; text-shadow: 2px 2px 0 rgba(0,0,0,.2); animation: pop .5s; }
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-10px); }
+    40% { transform: translateX(10px); }
+    60% { transform: translateX(-6px); }
+    80% { transform: translateX(6px); }
+}
+
+@keyframes pop {
+    0%   { transform: scale(.7); }
+    70%  { transform: scale(1.08); }
+    100% { transform: scale(1); }
+}
+
+.next {
+    font: inherit;
+    font-size: clamp(1.4rem, 3.5vw, 2rem);
+    font-weight: 800;
+    color: #fff;
+    background: linear-gradient(135deg, #3a86ff, #8338ec);
+    border: none;
+    border-radius: 999px;
+    padding: .8rem 2rem;
+    cursor: pointer;
+    box-shadow: 0 6px 0 #4c1d95;
+    transition: transform .1s;
+}
+.next:hover { transform: translateY(-2px); }
+.next:active { transform: translateY(4px); box-shadow: 0 2px 0 #4c1d95; }
+
+/* ---------- Credits ---------- */
+.credits {
+    flex: 0 0 auto;
+    margin-top: .75rem;
+    text-align: center;
+    font-size: .75rem;
+    opacity: .6;
+}
+
+/* ---------- Landscape (iPad etc.): fit everything in the visible height ---------- */
+@media (orientation: landscape) and (min-width: 701px) {
+    html, body { height: 100%; overflow: hidden; }
+
+    .app-shell {
+        /* dvh = the height actually visible, excluding Safari's toolbars */
+        height: 100vh;
+        height: 100dvh;
+        min-height: 0;
+        padding: max(.6rem, env(safe-area-inset-top)) max(1rem, env(safe-area-inset-right))
+                 max(.6rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left));
+    }
+
+    .title { margin-bottom: .4rem; flex: 0 0 auto; }
+    .title h1 { font-size: clamp(1.8rem, 8dvh, 3.2rem); }
+    .subtitle { font-size: clamp(.85rem, 2.8dvh, 1.25rem); margin: 0; }
+
+    .quiz {
+        flex: 1 1 auto;
+        min-height: 0;
+        gap: 1.25rem;
+        align-items: stretch;
+        padding-bottom: 10px; /* room for the 3D button shadows */
+    }
+
+    .target-box {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 0;
+        padding: .5rem;
+        border-width: 6px;
+        border-radius: 28px;
+    }
+    .target-label { font-size: clamp(.9rem, 3dvh, 1.3rem); }
+    .target-number { font-size: min(34dvh, 60cqi); line-height: 1; }
+
+    .right-side { min-height: 0; gap: .75rem; }
+
+    .grid {
+        flex: 1 1 auto;
+        min-height: 0;
+        grid-template-rows: repeat(4, minmax(0, 1fr));
+        gap: .55rem;
+    }
+
+    .tile {
+        aspect-ratio: auto;
+        height: 100%;
+        min-height: 0;
+        font-size: clamp(1.3rem, 6dvh, 2.8rem);
+        border-radius: 18px;
+        box-shadow: 0 4px 0 rgba(0,0,0,.25);
+    }
+    .tile.selected { transform: scale(1.05); outline-width: 4px; box-shadow: 0 0 0 7px #ffbe0b, 0 0 25px 8px rgba(255, 221, 0, .9); }
+
+    .feedback-row { flex: 0 0 auto; gap: .75rem; }
+    .message { padding: .4rem 1rem; font-size: clamp(1.1rem, 4.5dvh, 2rem); }
+    .next { padding: .5rem 1.6rem; font-size: clamp(1.1rem, 4.5dvh, 1.8rem); }
+    .credits { margin-top: .2rem; }
+}
+
+/* ---------- Blazor error bar ---------- */
+#blazor-error-ui {
+    background: #ffffcc;
+    bottom: 0;
+    box-shadow: 0 -1px 2px rgba(0,0,0,.2);
+    display: none;
+    left: 0;
+    padding: .6rem 1.25rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+#blazor-error-ui .dismiss { cursor: pointer; position: absolute; right: .75rem; top: .5rem; }

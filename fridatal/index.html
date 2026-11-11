@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <title>FridaTal</title>
+    <base href="fridatal" />
+
+    <!-- Icons: .ico for Windows/desktop browsers, PNGs for iOS home screen and PWA installs -->
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="64x64" href="favicon.png" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <meta name="theme-color" content="#8338ec" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="FridaTal" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+
+    <link rel="stylesheet" href="css/app.css" />
+</head>
+
+<body>
+    <div id="app">
+        <div class="loading">Indlæser FridaTal…</div>
+    </div>
+
+    <div id="blazor-error-ui">
+        Der opstod en fejl.
+        <a href="." class="reload">Genindlæs</a>
+        <span class="dismiss">🗙</span>
+    </div>
+
+    <script src="js/sounds.js"></script>
+    <script src="_framework/blazor.webassembly.js"></script>
+</body>
+
+</html>

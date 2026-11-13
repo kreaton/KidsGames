@@ -1,4 +1,4 @@
-name: Deploy front page to FTP and GitHub Pages
+name: Deploy front page to GitHub Pages
 
 on:
   push:
@@ -6,36 +6,6 @@ on:
   workflow_dispatch: # Also allows a manual run from the Actions tab
 
 jobs:
-  deploy-ftp:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6
-
-      # Uploads the site as-is (no build). Only changed files are sent after the first run.
-      # The games live in subfolders next to it (kidsgames/clockmaster/ etc.), deployed by their own repos.
-      # Repository secrets (Settings > Secrets and variables > Actions):
-      #   FTP_HOST      e.g. ftp.example.com
-      #   FTP_USERNAME
-      #   FTP_PASSWORD
-      #   FTP_FOLDER    webroots/www/kidsgames  (no trailing slash)
-      - name: Deploy to FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
-        with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: ${{ secrets.FTP_FOLDER }}/
-          local-dir: ./
-          # dangerous-clean-slate stays off, so the game folders next to the site are never touched
-          exclude: |
-            **/.git*
-            **/.git*/**
-            .github/**
-            tools/**
-            images/**
-            README.md
-
   # GitHub Pages serves the gh-pages branch. The front page goes in its root; each game repo
   # pushes itself into its own folder there, so only the front page files are replaced here.
   deploy-pages:

@@ -16,25 +16,25 @@
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="Taltræner" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <link href="_framework/dotnet.fdn9u5ttab.js" rel="preload" as="script" fetchpriority="high" crossorigin="anonymous" integrity="sha256-kwAF9VVjBQpzPYzDZooZwjbwVMtuk4n/zfBX46ceWuU=" />
+    <link href="_framework/dotnet.pmxg91tyhz.js" rel="preload" as="script" fetchpriority="high" crossorigin="anonymous" integrity="sha256-v1RsbmPl6cb1tsYVtsFSCjcXsovkfmx9Pi75y7+HaSU=" />
     <link rel="stylesheet" href="css/app.css" />
     <!-- If you add any scoped CSS files, uncomment the following to load them
     <link href="NumberTrainer.styles.css" rel="stylesheet" /> -->
     <script type="importmap">{
   "imports": {
     "./_framework/blazor.webassembly.js": "./_framework/blazor.webassembly.w3qd1tpl0e.js",
-    "./_framework/dotnet.js": "./_framework/dotnet.fdn9u5ttab.js",
     "./_framework/dotnet.native.js": "./_framework/dotnet.native.6ilbvndvcf.js",
+    "./_framework/dotnet.js": "./_framework/dotnet.pmxg91tyhz.js",
     "./_framework/dotnet.runtime.js": "./_framework/dotnet.runtime.v2rwe8u38b.js"
   },
   "scopes": {},
   "integrity": {
     "./_framework/blazor.webassembly.js": "sha256-lDXsDYFgm62F+YUvxES7IOTCXYpiHpU3uR45YdC6mq4=",
     "./_framework/blazor.webassembly.w3qd1tpl0e.js": "sha256-lDXsDYFgm62F+YUvxES7IOTCXYpiHpU3uR45YdC6mq4=",
-    "./_framework/dotnet.fdn9u5ttab.js": "sha256-kwAF9VVjBQpzPYzDZooZwjbwVMtuk4n/zfBX46ceWuU=",
-    "./_framework/dotnet.js": "sha256-kwAF9VVjBQpzPYzDZooZwjbwVMtuk4n/zfBX46ceWuU=",
+    "./_framework/dotnet.js": "sha256-v1RsbmPl6cb1tsYVtsFSCjcXsovkfmx9Pi75y7+HaSU=",
     "./_framework/dotnet.native.6ilbvndvcf.js": "sha256-YvNi2Q+yHnXi8iT7ROza0OEWWv2tCpuTI2Ggaeura3U=",
     "./_framework/dotnet.native.js": "sha256-YvNi2Q+yHnXi8iT7ROza0OEWWv2tCpuTI2Ggaeura3U=",
+    "./_framework/dotnet.pmxg91tyhz.js": "sha256-v1RsbmPl6cb1tsYVtsFSCjcXsovkfmx9Pi75y7+HaSU=",
     "./_framework/dotnet.runtime.js": "sha256-6SBqDbLLy460Bxd7wMZoiO97hZfLTuF+HRhWT3elS7U=",
     "./_framework/dotnet.runtime.v2rwe8u38b.js": "sha256-6SBqDbLLy460Bxd7wMZoiO97hZfLTuF+HRhWT3elS7U="
   }
@@ -49,6 +49,19 @@
         </svg>
         <div class="loading-progress-text"></div>
     </div>
+
+    <!-- "Alle spil" link in the footer (../ is the KidsGames front page). Needed when the front page
+         is pinned as an app or the browser is in full screen, where there is no back button. -->
+    <style>
+        .kg-home {
+            display: inline-flex; align-items: center; gap: .35em; margin: 0 .5em .25em 0;
+            padding: .3em .85em; border-radius: 999px; font: 700 .85rem/1.2 system-ui, sans-serif;
+            background: #fff; color: #2b2340; text-decoration: none; vertical-align: middle;
+            border: 1px solid rgba(43, 35, 64, .25); -webkit-tap-highlight-color: transparent;
+        }
+        .kg-home:hover, .kg-home:focus-visible { border-color: #2b2340; }
+        .kg-home svg { width: 1.15em; height: 1.15em; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+    </style>
 
     <div id="blazor-error-ui">
         Der opstod en fejl.

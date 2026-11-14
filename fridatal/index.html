@@ -26,6 +26,19 @@
         <div class="loading">Indlæser FridaTal…</div>
     </div>
 
+    <!-- "Alle spil" link in the footer (../ is the KidsGames front page). Needed when the front page
+         is pinned as an app or the browser is in full screen, where there is no back button. -->
+    <style>
+        .kg-home {
+            display: inline-flex; align-items: center; gap: .35em; margin: 0 .5em .25em 0;
+            padding: .3em .85em; border-radius: 999px; font: 700 .85rem/1.2 system-ui, sans-serif;
+            background: #fff; color: #2b2340; text-decoration: none; vertical-align: middle;
+            border: 1px solid rgba(43, 35, 64, .25); -webkit-tap-highlight-color: transparent;
+        }
+        .kg-home:hover, .kg-home:focus-visible { border-color: #2b2340; }
+        .kg-home svg { width: 1.15em; height: 1.15em; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+    </style>
+
     <div id="blazor-error-ui">
         Der opstod en fejl.
         <a href="." class="reload">Genindlæs</a>

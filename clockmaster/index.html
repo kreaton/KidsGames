@@ -24,25 +24,25 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&display=swap" rel="stylesheet" />
 
-    <link href="_framework/dotnet.0r1ools6sy.js" rel="preload" as="script" fetchpriority="high" crossorigin="anonymous" integrity="sha256-JBV51bFd6dGhumup4ie6WNUC1fIWgWDxFcMBOOHM3I0=" />
+    <link href="_framework/dotnet.veb7bxfoct.js" rel="preload" as="script" fetchpriority="high" crossorigin="anonymous" integrity="sha256-ecv51T2XQTXbTqmLS3r/5kB9OF4FiRCHFGGltP3Alp4=" />
     <link rel="stylesheet" href="css/app.css" />
     <script type="importmap">{
   "imports": {
     "./_framework/blazor.webassembly.js": "./_framework/blazor.webassembly.w3qd1tpl0e.js",
-    "./_framework/dotnet.js": "./_framework/dotnet.0r1ools6sy.js",
     "./_framework/dotnet.native.js": "./_framework/dotnet.native.6ilbvndvcf.js",
-    "./_framework/dotnet.runtime.js": "./_framework/dotnet.runtime.v2rwe8u38b.js"
+    "./_framework/dotnet.runtime.js": "./_framework/dotnet.runtime.v2rwe8u38b.js",
+    "./_framework/dotnet.js": "./_framework/dotnet.veb7bxfoct.js"
   },
   "scopes": {},
   "integrity": {
     "./_framework/blazor.webassembly.js": "sha256-lDXsDYFgm62F+YUvxES7IOTCXYpiHpU3uR45YdC6mq4=",
     "./_framework/blazor.webassembly.w3qd1tpl0e.js": "sha256-lDXsDYFgm62F+YUvxES7IOTCXYpiHpU3uR45YdC6mq4=",
-    "./_framework/dotnet.0r1ools6sy.js": "sha256-JBV51bFd6dGhumup4ie6WNUC1fIWgWDxFcMBOOHM3I0=",
-    "./_framework/dotnet.js": "sha256-JBV51bFd6dGhumup4ie6WNUC1fIWgWDxFcMBOOHM3I0=",
+    "./_framework/dotnet.js": "sha256-ecv51T2XQTXbTqmLS3r/5kB9OF4FiRCHFGGltP3Alp4=",
     "./_framework/dotnet.native.6ilbvndvcf.js": "sha256-YvNi2Q+yHnXi8iT7ROza0OEWWv2tCpuTI2Ggaeura3U=",
     "./_framework/dotnet.native.js": "sha256-YvNi2Q+yHnXi8iT7ROza0OEWWv2tCpuTI2Ggaeura3U=",
     "./_framework/dotnet.runtime.js": "sha256-6SBqDbLLy460Bxd7wMZoiO97hZfLTuF+HRhWT3elS7U=",
-    "./_framework/dotnet.runtime.v2rwe8u38b.js": "sha256-6SBqDbLLy460Bxd7wMZoiO97hZfLTuF+HRhWT3elS7U="
+    "./_framework/dotnet.runtime.v2rwe8u38b.js": "sha256-6SBqDbLLy460Bxd7wMZoiO97hZfLTuF+HRhWT3elS7U=",
+    "./_framework/dotnet.veb7bxfoct.js": "sha256-ecv51T2XQTXbTqmLS3r/5kB9OF4FiRCHFGGltP3Alp4="
   }
 }</script>
 </head>
@@ -55,6 +55,19 @@
         </svg>
         <div class="loading-progress-text"></div>
     </div>
+
+    <!-- "Alle spil" link in the footer (../ is the KidsGames front page). Needed when the front page
+         is pinned as an app or the browser is in full screen, where there is no back button. -->
+    <style>
+        .kg-home {
+            display: inline-flex; align-items: center; gap: .35em; margin: 0 .5em .25em 0;
+            padding: .3em .85em; border-radius: 999px; font: 700 .85rem/1.2 system-ui, sans-serif;
+            background: #fff; color: #2b2340; text-decoration: none; vertical-align: middle;
+            border: 1px solid rgba(43, 35, 64, .25); -webkit-tap-highlight-color: transparent;
+        }
+        .kg-home:hover, .kg-home:focus-visible { border-color: #2b2340; }
+        .kg-home svg { width: 1.15em; height: 1.15em; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+    </style>
 
     <div id="blazor-error-ui">
         Der opstod en fejl.

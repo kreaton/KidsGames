@@ -26,25 +26,25 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&display=swap" rel="stylesheet" />
 
-    <link href="_framework/dotnet.85cvk9hw89.js" rel="preload" as="script" fetchpriority="high" crossorigin="anonymous" integrity="sha256-PLdqUzD/ejhDFL5BAKUm3cXoLFAcOaXjM/qyscysl/8=" />
+    <link href="_framework/dotnet.uuah2r4y73.js" rel="preload" as="script" fetchpriority="high" crossorigin="anonymous" integrity="sha256-Np8ysXJo19Ele6P5lfN+hk9AG/Ao31bEmivYB0bChSY=" />
     <link rel="stylesheet" href="css/app.css" />
     <script type="importmap">{
   "imports": {
     "./_framework/blazor.webassembly.js": "./_framework/blazor.webassembly.w3qd1tpl0e.js",
-    "./_framework/dotnet.js": "./_framework/dotnet.85cvk9hw89.js",
     "./_framework/dotnet.native.js": "./_framework/dotnet.native.6ilbvndvcf.js",
-    "./_framework/dotnet.runtime.js": "./_framework/dotnet.runtime.v2rwe8u38b.js"
+    "./_framework/dotnet.runtime.js": "./_framework/dotnet.runtime.v2rwe8u38b.js",
+    "./_framework/dotnet.js": "./_framework/dotnet.uuah2r4y73.js"
   },
   "scopes": {},
   "integrity": {
     "./_framework/blazor.webassembly.js": "sha256-lDXsDYFgm62F+YUvxES7IOTCXYpiHpU3uR45YdC6mq4=",
     "./_framework/blazor.webassembly.w3qd1tpl0e.js": "sha256-lDXsDYFgm62F+YUvxES7IOTCXYpiHpU3uR45YdC6mq4=",
-    "./_framework/dotnet.85cvk9hw89.js": "sha256-PLdqUzD/ejhDFL5BAKUm3cXoLFAcOaXjM/qyscysl/8=",
-    "./_framework/dotnet.js": "sha256-PLdqUzD/ejhDFL5BAKUm3cXoLFAcOaXjM/qyscysl/8=",
+    "./_framework/dotnet.js": "sha256-Np8ysXJo19Ele6P5lfN+hk9AG/Ao31bEmivYB0bChSY=",
     "./_framework/dotnet.native.6ilbvndvcf.js": "sha256-YvNi2Q+yHnXi8iT7ROza0OEWWv2tCpuTI2Ggaeura3U=",
     "./_framework/dotnet.native.js": "sha256-YvNi2Q+yHnXi8iT7ROza0OEWWv2tCpuTI2Ggaeura3U=",
     "./_framework/dotnet.runtime.js": "sha256-6SBqDbLLy460Bxd7wMZoiO97hZfLTuF+HRhWT3elS7U=",
-    "./_framework/dotnet.runtime.v2rwe8u38b.js": "sha256-6SBqDbLLy460Bxd7wMZoiO97hZfLTuF+HRhWT3elS7U="
+    "./_framework/dotnet.runtime.v2rwe8u38b.js": "sha256-6SBqDbLLy460Bxd7wMZoiO97hZfLTuF+HRhWT3elS7U=",
+    "./_framework/dotnet.uuah2r4y73.js": "sha256-Np8ysXJo19Ele6P5lfN+hk9AG/Ao31bEmivYB0bChSY="
   }
 }</script>
 </head>
@@ -59,17 +59,26 @@
         </div>
     </div>
 
-    <!-- "Alle spil" link in the footer (../ is the KidsGames front page). Needed when the front page
-         is pinned as an app or the browser is in full screen, where there is no back button. -->
+    <!-- "Alle spil" button at the top right, back to the KidsGames front page (../). Needed when the
+         front page is pinned as an app or the browser is in full screen, where there is no back button.
+         On narrow screens only the house icon shows. -->
     <style>
         .kg-home {
-            display: inline-flex; align-items: center; gap: .35em; margin: 0 .5em .25em 0;
-            padding: .3em .85em; border-radius: 999px; font: 700 .85rem/1.2 system-ui, sans-serif;
-            background: #fff; color: #2b2340; text-decoration: none; vertical-align: middle;
-            border: 1px solid rgba(43, 35, 64, .25); -webkit-tap-highlight-color: transparent;
+            display: inline-flex; align-items: center; justify-content: center; gap: .4rem; flex: none;
+            min-width: 2.9rem; height: 2.9rem; padding: 0 1rem; box-sizing: border-box; border-radius: 999px;
+            background: #fff; color: #2b2340; text-decoration: none; white-space: nowrap;
+            font: 700 1.1rem/1 "Fredoka", system-ui, sans-serif;
+            box-shadow: 0 .25rem 0 rgba(43, 35, 64, .18), 0 .5rem 1rem -.5rem rgba(43, 35, 64, .35);
+            -webkit-tap-highlight-color: transparent;
         }
-        .kg-home:hover, .kg-home:focus-visible { border-color: #2b2340; }
-        .kg-home svg { width: 1.15em; height: 1.15em; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+        .kg-home:active { transform: translateY(.2rem); box-shadow: 0 .05rem 0 rgba(43, 35, 64, .18); }
+        .kg-home:focus-visible { outline: 3px solid #4dabf7; outline-offset: 2px; }
+        .kg-home svg { width: 1.6rem; height: 1.6rem; flex: none; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+        .kg-corner { position: absolute; z-index: 10; top: max(.75rem, env(safe-area-inset-top)); right: max(.75rem, env(safe-area-inset-right)); }
+        @media (max-width: 720px) {
+            .kg-home { padding: 0; width: 2.9rem; }
+            .kg-text { display: none; }
+        }
     </style>
 
     <div id="blazor-error-ui">

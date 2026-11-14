@@ -143,6 +143,15 @@ h1:focus { outline: none; }
 .btn { background: #fff; transition: transform .1s; }
 .btn:active { transform: translateY(2px) scale(.96); }
 
+/* "Alle spil" (shared style in index.html) drawn as one of the chips here */
+.chip.kg-home {
+    width: auto; height: auto; min-width: 2.2em; padding: .2em .8em;
+    font-family: inherit; font-size: clamp(.85rem, min(3.4vw, 3.8dvh), 1.4rem); line-height: normal;
+    box-shadow: 0 .15em 0 rgba(30,58,95,.2);
+}
+.chip.kg-home svg { width: 1.15em; height: 1.15em; }
+@media (max-width: 720px) { .chip.kg-home { padding: .2em .45em; } }
+
 .restart.confirm {
     background: #ff7a1a;
     color: #fff;

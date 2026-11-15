@@ -254,6 +254,24 @@ button.chip:active { transform: translateY(0.25rem); box-shadow: var(--shadow-pr
 }
 .timer.running { background: #fff3bf; }
 
+.head-right { display: flex; align-items: center; gap: 0.5rem; }
+
+/* The hint button: a round yellow "?" that lights up the next number on the floor. */
+.hint-btn {
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 50%;
+    background: #ffd43b;
+    color: #5c4400;
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 1;
+    box-shadow: 0 0.2rem 0 #f08c00;
+}
+.hint-btn:active { transform: translateY(0.15rem); box-shadow: 0 0.05rem 0 #f08c00; }
+.hint-btn:disabled { opacity: 0.4; box-shadow: none; }
+.hint-btn:focus-visible { outline: 3px solid var(--purple); outline-offset: 2px; }
+
 .slots {
     list-style: none;
     margin: 0;
@@ -390,6 +408,20 @@ button.chip:active { transform: translateY(0.25rem); box-shadow: var(--shadow-pr
 }
 .tile.wrong-a { animation: drop-in .4s ease-out var(--d, 0ms) backwards, shake .4s ease-out; }
 .tile.wrong-b { animation: drop-in .4s ease-out var(--d, 0ms) backwards, shake2 .4s ease-out; }
+
+/* The tile the hint points at glows yellow and pulses until it is picked. */
+.tile.hint {
+    --tile: #fff3bf;
+    --tile-edge: #f08c00;
+    color: #5c4400;
+    z-index: 1;
+    animation: drop-in .4s ease-out var(--d, 0ms) backwards, glow 1s ease-in-out infinite;
+}
+
+@keyframes glow {
+    0%, 100% { scale: 1; filter: drop-shadow(0 0 0.2rem #ffd43b); }
+    50% { scale: 1.12; filter: drop-shadow(0 0 0.9rem #fab005); }
+}
 
 .floor.won .tile:not(.placed) { opacity: 0.45; }
 

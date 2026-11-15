@@ -2,11 +2,11 @@
 
 ![Static HTML](https://img.shields.io/badge/site-static%20HTML-lightgrey)
 
-![Børnenes Spil: forsiden til syv små spil](images/banner.png)
+![Børnenes Spil: forsiden til otte små spil](images/banner.png)
 
-**Forsiden til syv små spil.**
+**Forsiden til otte små spil.**
 
-Statisk forside med links til spillene (`clockmaster/`, `countthedice/`, `fridatal/`, `numbertowers/`,
+Statisk forside med links til spillene (`axolotltables/`, `clockmaster/`, `countthedice/`, `fridatal/`, `numbertowers/`,
 `numbertrainer/`, `stavemester/`, `whoisbiggest/`). Ingen build. Spillene ligger som undermapper af
 KidsGames og deployes af deres egne repos.
 

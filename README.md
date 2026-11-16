@@ -4,9 +4,9 @@
 
 ![Børnenes Spil: forsiden til otte små spil](images/banner.png)
 
-**Forsiden til ni små spil.**
+**Forsiden til ti små spil.**
 
-Statisk forside med links til spillene (`axolotltables/`, `clockmaster/`, `clockmastereasy/`, `countthedice/`, `fridatal/`, `numbertowers/`,
+Statisk forside med links til spillene (`axolotltables/`, `clockmaster/`, `clockmastereasy/`, `countthedice/`, `fridatal/`, `kombimester/`, `numbertowers/`,
 `numbertrainer/`, `stavemester/`, `whoisbiggest/`). Ingen build. Spillene ligger som undermapper af
 KidsGames og deployes af deres egne repos.
 

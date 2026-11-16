@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>HuskeMester</title>
+    <base href="huskemester" />
+
+    <!-- Home screen / iOS pinning -->
+    <meta name="theme-color" content="#96f2d7" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="HuskeMester" />
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="167x167" href="icons/apple-touch-icon-167.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="icons/apple-touch-icon-152.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png" />
+    <link rel="manifest" href="manifest.webmanifest" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&display=swap" rel="stylesheet" />
+
+    <link href="_framework/dotnet.5jmj3gazro.js" rel="preload" as="script" fetchpriority="high" crossorigin="anonymous" integrity="sha256-0XupCISeRjtJqcxBckhbF0MBbcCqI1H6csQe26q3ik8=" />
+    <link rel="stylesheet" href="css/app.css" />
+    <script type="importmap">{
+  "imports": {
+    "./_framework/blazor.webassembly.js": "./_framework/blazor.webassembly.w3qd1tpl0e.js",
+    "./_framework/dotnet.js": "./_framework/dotnet.5jmj3gazro.js",
+    "./_framework/dotnet.native.js": "./_framework/dotnet.native.6ilbvndvcf.js",
+    "./_framework/dotnet.runtime.js": "./_framework/dotnet.runtime.v2rwe8u38b.js"
+  },
+  "scopes": {},
+  "integrity": {
+    "./_framework/blazor.webassembly.js": "sha256-lDXsDYFgm62F+YUvxES7IOTCXYpiHpU3uR45YdC6mq4=",
+    "./_framework/blazor.webassembly.w3qd1tpl0e.js": "sha256-lDXsDYFgm62F+YUvxES7IOTCXYpiHpU3uR45YdC6mq4=",
+    "./_framework/dotnet.5jmj3gazro.js": "sha256-0XupCISeRjtJqcxBckhbF0MBbcCqI1H6csQe26q3ik8=",
+    "./_framework/dotnet.js": "sha256-0XupCISeRjtJqcxBckhbF0MBbcCqI1H6csQe26q3ik8=",
+    "./_framework/dotnet.native.6ilbvndvcf.js": "sha256-YvNi2Q+yHnXi8iT7ROza0OEWWv2tCpuTI2Ggaeura3U=",
+    "./_framework/dotnet.native.js": "sha256-YvNi2Q+yHnXi8iT7ROza0OEWWv2tCpuTI2Ggaeura3U=",
+    "./_framework/dotnet.runtime.js": "sha256-6SBqDbLLy460Bxd7wMZoiO97hZfLTuF+HRhWT3elS7U=",
+    "./_framework/dotnet.runtime.v2rwe8u38b.js": "sha256-6SBqDbLLy460Bxd7wMZoiO97hZfLTuF+HRhWT3elS7U="
+  }
+}</script>
+</head>
+
+<body>
+    <div id="app">
+        <svg class="loading-progress">
+            <circle r="40%" cx="50%" cy="50%" />
+            <circle r="40%" cx="50%" cy="50%" />
+        </svg>
+        <div class="loading-progress-text"></div>
+    </div>
+
+    <!-- "Alle spil" button at the top right, back to the KidsGames front page (../). Needed when the
+         front page is pinned as an app or the browser is in full screen, where there is no back button.
+         On narrow screens only the house icon shows. -->
+    <style>
+        .kg-home {
+            display: inline-flex; align-items: center; justify-content: center; gap: .4rem; flex: none;
+            min-width: 2.9rem; height: 2.9rem; padding: 0 1rem; box-sizing: border-box; border-radius: 999px;
+            background: #fff; color: #2b2340; text-decoration: none; white-space: nowrap;
+            font: 700 1.1rem/1 "Fredoka", system-ui, sans-serif;
+            box-shadow: 0 .25rem 0 rgba(43, 35, 64, .18), 0 .5rem 1rem -.5rem rgba(43, 35, 64, .35);
+            -webkit-tap-highlight-color: transparent;
+        }
+        .kg-home:active { transform: translateY(.2rem); box-shadow: 0 .05rem 0 rgba(43, 35, 64, .18); }
+        .kg-home:focus-visible { outline: 3px solid #4dabf7; outline-offset: 2px; }
+        .kg-home svg { width: 1.6rem; height: 1.6rem; flex: none; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+        .kg-corner { position: absolute; z-index: 10; top: max(.75rem, env(safe-area-inset-top)); right: max(.75rem, env(safe-area-inset-right)); }
+        @media (max-width: 720px) {
+            .kg-home { padding: 0; width: 2.9rem; }
+            .kg-text { display: none; }
+        }
+    </style>
+
+    <div id="blazor-error-ui">
+        Der opstod en fejl.
+        <a href="." class="reload">Genindlæs</a>
+        <span class="dismiss">🗙</span>
+    </div>
+    <script src="js/sounds.js"></script>
+    <script src="js/huske.js"></script>
+    <script src="_framework/blazor.webassembly.w3qd1tpl0e.js"></script>
+</body>
+
+</html>

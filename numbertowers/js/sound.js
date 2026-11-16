@@ -93,6 +93,18 @@
             tone(311, 0, 0.2, { type: "sawtooth", vol: 0.18, to: 262, lowpass: 900 });
             tone(233, 0.2, 0.42, { type: "sawtooth", vol: 0.18, to: 165, lowpass: 700 });
         },
+        // Too many guesses: an alarm "uh-oh" followed by bricks tumbling down.
+        penalty() {
+            [0, 0.28].forEach(t => {
+                tone(880, t, 0.22, { type: "square", vol: 0.14, lowpass: 2200 });
+                tone(659.25, t + 0.12, 0.2, { type: "square", vol: 0.14, lowpass: 2200 });
+            });
+            tone(392, 0.62, 0.7, { type: "sawtooth", vol: 0.2, to: 98, lowpass: 900 });
+            [0.75, 0.9, 1.02, 1.12].forEach((t, i) => {
+                noise(t, 0.18, 500 - i * 80, 120, 0.4);
+                tone(180 - i * 25, t, 0.14, { type: "sine", vol: 0.3, to: 60 });
+            });
+        },
         shuffle() {
             noise(0, 0.55, 300, 3500, 0.35);
             [0, 0.07, 0.14, 0.21].forEach((t, i) => tone(700 + i * 180, t, 0.1, { type: "sine", vol: 0.12 }));

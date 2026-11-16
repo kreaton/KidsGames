@@ -140,6 +140,12 @@ h1:focus { outline: none; }
 
 .timer { font-variant-numeric: tabular-nums; min-width: 4.6em; }
 
+/* Wrong guesses left before every tower loses a floor */
+.lives { gap: .1em; padding: .2em .55em; }
+.lives .heart { display: inline-block; font-size: .85em; transition: transform .25s, opacity .25s, filter .25s; }
+.lives .heart.lost { opacity: .35; filter: grayscale(1); transform: scale(.75); }
+.lives.last { background: #ffe1e1; animation: wiggle .5s ease-in-out infinite; }
+
 .btn { background: #fff; transition: transform .1s; }
 .btn:active { transform: translateY(2px) scale(.96); }
 
@@ -283,6 +289,9 @@ h1:focus { outline: none; }
 }
 
 .tower.complete .floors { animation: cheer .7s ease-in-out 2; }
+
+/* Penalty for guessing: every tower wobbles as its top floor falls off */
+.towers.crumble .floors { animation: crumble .8s ease-in-out; }
 .tower.complete .base { font-size: 1em; animation: spin-in .6s ease-out both; }
 
 /* ===== Brick grid ===== */
@@ -385,6 +394,12 @@ h1:focus { outline: none; }
 
 .toast.bad  { background: #ff5a5f; }
 .toast.info { background: #8b5cf6; }
+.toast.warn {
+    background: #e11d48;
+    border-radius: 1.2em;
+    font-size: clamp(1.1rem, min(4.8vw, 5dvh), 2.3rem);
+    animation: toast-in .35s cubic-bezier(.3,1.6,.6,1) both, toast-wiggle .4s ease-in-out .35s 3;
+}
 
 /* ===== Win overlay ===== */
 
@@ -561,9 +576,25 @@ h1:focus { outline: none; }
     75% { transform: rotate(3deg); }
 }
 
+@keyframes crumble {
+    0%, 100% { transform: none; }
+    15% { transform: translateX(-4%) rotate(-3deg); }
+    30% { transform: translateX(4%) rotate(3deg); }
+    45% { transform: translateX(-3%) rotate(-2deg) translateY(2%); }
+    60% { transform: translateX(2%) rotate(1deg) translateY(2%); }
+    80% { transform: translateY(1%); }
+}
+
 @keyframes toast-in {
     from { transform: translate(-50%, -30%) scale(.6); opacity: 0; }
     to   { transform: translate(-50%, 0) scale(1); opacity: 1; }
+}
+
+/* Keeps the toast's centering translate while it wiggles */
+@keyframes toast-wiggle {
+    0%, 100% { transform: translate(-50%, 0) rotate(0); }
+    25% { transform: translate(-50%, 0) rotate(-2.5deg); }
+    75% { transform: translate(-50%, 0) rotate(2.5deg); }
 }
 
 @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }

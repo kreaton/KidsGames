@@ -27,7 +27,7 @@
 .peg-2 { --c: #51cf66; --tint: #d3f9d8; }
 .peg-3 { --c: #fcc419; --tint: #fff3bf; }
 .peg-4 { --c: #9775fa; --tint: #e5dbff; }
-.peg-5 { --c: #ff922b; --tint: #ffe8cc; }
+.peg-5 { --c: #343a40; --tint: #dee2e6; }
 
 /* The portrait layout is about 30rem by 64rem, so the rem scales to fit it on screen. */
 html {

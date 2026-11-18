@@ -2,6 +2,9 @@
 
 ![Static HTML](https://img.shields.io/badge/site-static%20HTML-lightgrey)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/kreaton/KidsGames?style=flat&logo=github&color=yellow)](https://github.com/kreaton/KidsGames/stargazers)
+
+⭐ Hvis KidsGames fortjener en plads på din maskine, så [giv det en stjerne på GitHub](https://github.com/kreaton/KidsGames) — det er gratis, lavet af én udvikler, og stjerner er det, der får andre til at finde det.
 
 ![Børnenes Spil: forsiden til otte små spil](images/banner.png)
 

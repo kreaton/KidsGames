@@ -107,7 +107,7 @@
     .c1 { --accent: var(--c1); } .c2 { --accent: var(--c2); } .c3 { --accent: #2f9e44; }
     .c4 { --accent: #e67700; } .c5 { --accent: #7950f2; } .c6 { --accent: #e8590c; }
     .c7 { --accent: #1c7ed6; } .c8 { --accent: #e64980; } .c9 { --accent: #e03131; }
-    .c10 { --accent: #ae3ec9; } .c11 { --accent: #0c8599; }
+    .c10 { --accent: #ae3ec9; } .c11 { --accent: #0c8599; } .c12 { --accent: #c8102e; }
 
     .hint {
       display: flex; align-items: flex-start; gap: 12px; max-width: 34rem; margin: 22px auto 0;
@@ -136,7 +136,7 @@
     <header>
       <div class="bubbles" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>A</span></div>
       <h1>Børnenes Spil</h1>
-      <p class="lead">Små, glade spil om tal, terninger, bogstaver og klokken. De virker på mobil og iPad – og kan lægges på hjemmeskærmen som en app.</p>
+      <p class="lead">Små, glade spil om tal, terninger, bogstaver, klokken og Danmarks byer. De virker på mobil og iPad – og kan lægges på hjemmeskærmen som en app.</p>
       <!-- Shown only in Safari on iPhone/iPad: a page opened from a link keeps Safari's bars,
            while a game added to the home screen gets the whole screen. -->
       <div class="hint" id="hint" hidden>
@@ -148,6 +148,16 @@
     </header>
 
     <main class="grid">
+      <a class="card c12" href="danskebyer/">
+        <div class="top">
+          <img class="icon" src="billeder/danskebyer.png" alt="" width="88" height="88" />
+          <h2>Danske Byer<span class="orig">Danmarkskortet</span></h2>
+        </div>
+        <p>Find byerne på Danmarkskortet! Tryk på en prik, hør navnet og se byskiltet, et foto og hvad byen er kendt for. I quizzen skal du finde byen – let med navnet læst op, eller svær kun ud fra en beskrivelse. Med seværdigheder som Legoland, Kronborg og Den Lille Havfrue.</p>
+        <ul class="tags"><li>Geografi</li><li>10, 25 eller 75 byer</li><li>Let eller svær quiz</li></ul>
+        <span class="play">Spil <span>➜</span></span>
+      </a>
+
       <a class="card c11" href="huskemester/">
         <div class="top">
           <img class="icon" src="billeder/huskemester.png" alt="" width="88" height="88" />

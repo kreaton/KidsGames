@@ -1,0 +1,501 @@
+:root {
+    /* Warm amber, so the deep blue sea on the map stands out from the page. */
+    --bg-top: #f59f00;
+    --bg-bottom: #e8590c;
+    --ink: #3b2a63;
+    --card: #ffffff;
+    --shadow: 0 0.35rem 0 rgba(59, 42, 99, 0.22);
+    --shadow-small: 0 0.2rem 0 rgba(59, 42, 99, 0.2);
+    --shadow-pressed: 0 0.1rem 0 rgba(59, 42, 99, 0.22);
+
+    /* Dannebrog red is the accent. */
+    --red: #c8102e;
+    --red-dark: #8f0b21;
+    --red-soft: #ffe3e8;
+    --green: #40c057;
+    --green-dark: #2b8a3e;
+    --orange: #ff922b;
+    --blue: #228be6;
+    --yellow: #fcc419;
+
+    --sea: #d0ebff;
+    --land: #fff9db;
+    --coast: #c9b458;
+
+    font-family: "Fredoka", "Baloo 2", "Comic Sans MS", system-ui, sans-serif;
+    color: var(--ink);
+}
+
+html { font-size: 16px; }
+@media (min-width: 1400px) { html { font-size: 17px; } }
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; min-height: 100%; }
+
+body {
+    min-height: 100dvh;
+    background: linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
+    background-attachment: fixed;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+button { font: inherit; color: inherit; cursor: pointer; border: none; }
+button:disabled { cursor: default; }
+button:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+h2, h3 { font-weight: 700; }
+
+/* ---------- Layout ---------- */
+
+.byer-page {
+    max-width: 88rem;
+    min-height: 100dvh;
+    margin: 0 auto;
+    padding: 0.9rem 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.title h1 {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.04rem;
+    text-shadow: 0 0.2rem 0 var(--red-dark), 0 0.4rem 0 rgba(59, 42, 99, .3);
+    white-space: nowrap;
+}
+
+.title h1:focus { outline: none; }
+
+/* Sound on/off sits next to "Alle spil" and looks like it. */
+.title-actions { display: flex; align-items: center; gap: 0.5rem; flex: none; }
+.sound-btn {
+    width: 2.9rem;
+    height: 2.9rem;
+    padding: 0;
+    border: none;
+    border-radius: 999px;
+    background: #fff;
+    font-size: 1.35rem;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 .25rem 0 rgba(43, 35, 64, .18), 0 .5rem 1rem -.5rem rgba(43, 35, 64, .35);
+    -webkit-tap-highlight-color: transparent;
+}
+.sound-btn:active { transform: translateY(.2rem); box-shadow: 0 .05rem 0 rgba(43, 35, 64, .18); }
+.sound-btn:focus-visible { outline: 3px solid #4dabf7; outline-offset: 2px; }
+
+/* The waving flag: the GIF has wide transparent margins (the flag fills 484 × 424 of 720 × 544),
+   so a box with the flag's shape shows only that part. */
+.flag {
+    position: relative;
+    flex: none;
+    width: 3.6rem;
+    aspect-ratio: 484 / 424;
+    overflow: hidden;
+    filter: drop-shadow(0 0.2rem 0 rgba(59, 42, 99, .2));
+}
+
+.flag img {
+    position: absolute;
+    width: 148.76%;          /* 720 / 484 */
+    left: -24.38%;           /* 118 / 484 */
+    top: -13.92%;            /* 59 / 424 */
+    max-width: none;
+}
+
+.toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem 1rem;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(19rem, 1fr);
+    gap: 1rem;
+    align-items: start;
+}
+
+@media (max-width: 860px) {
+    .board { grid-template-columns: 1fr; }
+    .title h1 { font-size: 1.9rem; }
+    .flag { width: 2.9rem; }
+}
+
+/* ---------- Segmented buttons ---------- */
+
+.segmented {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.2rem;
+    padding: 0.25rem;
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.segmented button {
+    min-height: 2.75rem;
+    padding: 0.2rem 0.95rem;
+    border-radius: 0.8rem;
+    background: transparent;
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.segmented button:hover:not(.active) { background: rgba(255, 255, 255, 0.8); }
+.segmented button.active { background: var(--red); color: #fff; box-shadow: 0 0.2rem 0 var(--red-dark); }
+
+.segmented.levels button { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.segmented button small { font-size: 0.72rem; font-weight: 500; opacity: 0.8; }
+
+.segmented.small { background: var(--sea); }
+.segmented.small button { min-height: 2.2rem; padding: 0.15rem 0.7rem; font-size: 0.9rem; }
+
+/* ---------- Map ---------- */
+
+.mapwrap {
+    background: var(--card);
+    border-radius: 1.4rem;
+    padding: 0.6rem;
+    box-shadow: var(--shadow);
+}
+
+/* The SVG itself has no sea: the water is the element's background – little white wave marks
+   (an inline SVG tile) over a deeper blue gradient. The waves drift slowly to the right; the tile
+   is in screen pixels, so they keep their size when the map zooms. */
+.map {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1241 / 1005;
+    background-color: #1864ab;
+    background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='56'%3E%3Cg fill='none' stroke='%23fff' stroke-linecap='round' stroke-width='2.4'%3E%3Cpath stroke-opacity='.4' d='M6 16q8-7 16 0t16 0'/%3E%3Cpath stroke-opacity='.25' d='M54 44q8-7 16 0t16 0'/%3E%3C/g%3E%3C/svg%3E"),
+        radial-gradient(ellipse at 30% 20%, rgba(255, 255, 255, 0.18), transparent 60%),
+        linear-gradient(180deg, #1c7ed6, #0b4a85);
+    background-size: 96px 56px, 100% 100%, 100% 100%;
+    border-radius: 1rem;
+    touch-action: manipulation;
+    animation: sea-drift 14s linear infinite;
+}
+
+@keyframes sea-drift {
+    from { background-position: 0 0, 0 0, 0 0; }
+    to   { background-position: 96px 0, 0 0, 0 0; }
+}
+
+.land {
+    fill: var(--land);
+    stroke: var(--coast);
+    stroke-width: 1.5;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;   /* the same thickness at every zoom */
+}
+
+.town { cursor: pointer; outline: none; }
+.town .hit { fill: transparent; }
+.town .dot { fill: var(--red); stroke: #fff; transition: fill .15s; }
+.town:hover .dot, .town:focus-visible .dot { fill: #ff5a73; }
+.town.selected .dot { fill: var(--blue); }
+.town.correct .dot { fill: var(--green); }
+.town.wrong .dot { fill: #868e96; }
+
+.sight { cursor: pointer; outline: none; }
+.sight .hit { fill: transparent; }
+.sight path { fill: var(--yellow); stroke: #9c6d00; stroke-width: 1; }
+.sight:hover path, .sight.selected path { fill: var(--orange); }
+.sight.correct path { fill: var(--green); stroke: #1b5e20; }
+.sight.wrong path { fill: #868e96; stroke: #495057; }
+.quiz-sight-name { margin: 0.2rem 0 0.4rem; text-align: center; font-size: 1.6rem; font-weight: 700; }
+
+.label { fill: var(--ink); font-family: "Fredoka", system-ui, sans-serif; font-weight: 700; paint-order: stroke; stroke: #fff; pointer-events: none; }
+
+.mapbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.75rem;
+    align-items: center;
+    padding: 0.6rem 0.2rem 0.1rem;
+}
+
+.toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.8rem;
+    border-radius: 999px;
+    background: var(--sea);
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+.map-credit { margin: 0.35rem 0.3rem 0; font-size: 0.75rem; opacity: 0.7; }
+.map-credit a { color: inherit; }
+
+.toggle input { width: 1.1rem; height: 1.1rem; accent-color: var(--red); margin: 0; cursor: pointer; }
+
+/* ---------- Side panel ---------- */
+
+.panel { display: flex; flex-direction: column; gap: 0.75rem; }
+
+.card {
+    background: var(--card);
+    border-radius: 1.4rem;
+    padding: 1rem 1.2rem;
+    box-shadow: var(--shadow);
+}
+
+.card h2 { margin: 0.1rem 0 0.5rem; font-size: 1.5rem; }
+.card h3 { margin: 1rem 0 0.4rem; font-size: 1.1rem; }
+.card p { margin: 0.5rem 0; }
+
+.intro { animation: bounce-in .4s ease-out; }
+.intro p { font-size: 1.1rem; line-height: 1.45; }
+
+.desc { font-size: 1.1rem; line-height: 1.5; }
+
+.clue {
+    font-size: 1.25rem;
+    line-height: 1.45;
+    background: #fff8db;
+    border-left: 0.35rem solid var(--yellow);
+    padding: 0.7rem 0.9rem;
+    border-radius: 0.8rem;
+}
+
+.hint {
+    background: #e7f5ff;
+    border-radius: 0.8rem;
+    padding: 0.55rem 0.8rem;
+    font-size: 1.05rem;
+    animation: bounce-in .35s ease-out;
+}
+
+.muted { color: rgba(59, 42, 99, 0.65); font-size: 0.95rem; }
+
+.facts {
+    list-style: none;
+    padding: 0;
+    margin: 0.75rem 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.45rem;
+}
+
+.facts li { background: #f3f0ff; border-radius: 0.8rem; padding: 0.35rem 0.6rem; }
+.facts span { display: block; opacity: 0.7; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+.facts strong { font-size: 1.05rem; }
+
+/* Danish town-name sign */
+.roadsign { position: relative; container-type: inline-size; width: min(80%, 256px); margin: 0.25rem auto 0.5rem; filter: drop-shadow(0 3px 5px rgba(0, 0, 0, .35)); }
+.roadsign img { display: block; width: 100%; height: auto; }
+/* The name sits centred in the empty upper half of the sign, above the buildings. */
+.roadsign-name { position: absolute; left: 5%; right: 5%; top: 7%; height: 46%; display: flex; align-items: center; justify-content: center; text-align: center; color: #111; font-family: "DIN Alternate", "Arial Narrow", Arial, sans-serif; font-weight: 700; line-height: 1; white-space: nowrap; }
+
+.photo { margin: 0.6rem 0; text-align: center; }
+.photo img { max-width: 100%; max-height: 260px; border-radius: 1rem; object-fit: cover; box-shadow: var(--shadow-small); }
+.photo figcaption { font-size: 0.72rem; opacity: 0.65; margin-top: 0.35rem; }
+.photo figcaption a { color: inherit; }
+.photo-skeleton { height: 170px; border-radius: 1rem; background: linear-gradient(90deg, #eceff4, #f8f9fb, #eceff4); background-size: 200% 100%; animation: shimmer 1.2s infinite linear; }
+
+.sight-title { margin-bottom: 0.1rem; }
+.sight-place { margin: 0; opacity: 0.7; font-weight: 700; }
+.sight-list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+/* ---------- Quiz ---------- */
+
+.stats { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 4.2rem;
+    padding: 0.25rem 0.7rem 0.3rem;
+    border-radius: 0.9rem;
+    background: var(--card);
+    box-shadow: var(--shadow-small);
+}
+
+.stat-label { font-size: 0.72rem; font-weight: 700; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.06em; }
+.stat-value { font-size: 1.3rem; font-weight: 700; line-height: 1.15; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tries { display: flex; gap: 0.15rem; }
+.tries .try { font-size: 1.6rem; line-height: 0.85; }
+.try.on { color: var(--red); }
+.try.off { color: #dee2e6; }
+
+.message {
+    margin: 0;
+    padding: 0.55rem 1rem;
+    border-radius: 1rem;
+    font-size: 1.15rem;
+    font-weight: 700;
+    box-shadow: var(--shadow-small);
+}
+
+.message.info { background: var(--card); animation: bounce-in .35s ease-out; }
+.card .message.info { background: #fff4e6; box-shadow: none; font-size: 1.05rem; animation: shake .45s ease-out; }
+.message.success { background: var(--green); color: #fff; animation: bounce-in .45s ease-out; }
+.message.bad { background: #fff; color: #d9480f; box-shadow: inset 0.35rem 0 0 #d9480f, var(--shadow-small); animation: bounce-in .45s ease-out; }
+
+/* Quiz answer: the verdict with the "Næste" button beside it (below it on narrow screens). */
+.answer-bar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.6rem; padding: 0.6rem 0.7rem 0.75rem 1rem; }
+.answer-bar .answer-text { flex: 1 1 12rem; font-size: 1.2rem; }
+.answer-bar .next-btn { flex: none; margin-left: auto; font-size: 1.2rem; padding: 0.55rem 1.1rem; }
+.answer-bar.success .next-btn { background: #fff; color: var(--green-dark); box-shadow: 0 0.35rem 0 rgba(0, 0, 0, 0.22); }
+
+.row { display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 0.75rem 0 0.25rem; }
+
+.chip {
+    padding: 0.45rem 1rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.85);
+    font-size: 1.05rem;
+    font-weight: 700;
+    border: 0.12rem solid rgba(59, 42, 99, 0.2);
+    white-space: nowrap;
+}
+
+.chip:hover { background: #fff; border-color: var(--red); }
+.chip:active { transform: translateY(0.15rem); }
+.replay-row { display: flex; justify-content: center; margin: -0.1rem 0 0.4rem; }
+.chip.replay { padding: 0.35rem 0.9rem; font-size: 1rem; }
+.chip.small { padding: 0.3rem 0.8rem; font-size: 0.95rem; background: #fff8db; white-space: normal; text-align: left; }
+
+.big-btn {
+    padding: 0.7rem 1.4rem;
+    border-radius: 1.1rem;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.big-btn:active:not(:disabled) { transform: translateY(0.25rem); box-shadow: var(--shadow-pressed); }
+.next-btn { background: var(--red); box-shadow: 0 0.35rem 0 var(--red-dark); animation: wiggle 1.6s ease-in-out infinite; }
+.wide { width: 100%; }
+
+.result { text-align: center; animation: bounce-in .6s ease-out; }
+.result .trophy { font-size: 4.5rem; line-height: 1; animation: wiggle 1.6s ease-in-out infinite; }
+.result h2 { font-size: 2rem; color: var(--red); margin: 0.3rem 0 0; }
+.score { font-size: 2.6rem; font-weight: 700; margin: 0.2rem 0; font-variant-numeric: tabular-nums; }
+.verdict { font-size: 1.2rem; font-weight: 700; }
+.result .big-btn { margin: 0.4rem 0; }
+
+/* Flags and stars fall once when the quiz is done. */
+.rain-layer { position: fixed; inset: 0; z-index: 20; overflow: hidden; pointer-events: none; }
+
+.rain {
+    position: absolute;
+    top: -4rem;
+    line-height: 1;
+    animation: fall 3s linear 1 both;
+}
+
+img.rain { height: auto; }
+
+.credits { margin-top: auto; padding-top: 0.5rem; font-size: 0.8rem; color: #fff; opacity: 0.85; text-align: center; }
+.credits p { margin: 0.15rem 0; }
+
+/* ---------- Animations ---------- */
+
+@keyframes bounce-in {
+    0%   { transform: scale(.3); opacity: 0; }
+    60%  { transform: scale(1.05); opacity: 1; }
+    100% { transform: scale(1); }
+}
+
+@keyframes shake {
+    0%, 100% { translate: 0; }
+    20% { translate: -0.5rem; }
+    40% { translate: 0.5rem; }
+    60% { translate: -0.3rem; }
+    80% { translate: 0.3rem; }
+}
+
+@keyframes wiggle {
+    0%, 70%, 100% { rotate: 0deg; }
+    75% { rotate: -3deg; }
+    85% { rotate: 3deg; }
+    95% { rotate: -1.5deg; }
+}
+
+@keyframes fall {
+    0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+    85%  { opacity: 1; }
+    100% { transform: translateY(110vh) rotate(540deg); opacity: 0; }
+}
+
+@keyframes shimmer { to { background-position: -200% 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .rain-layer { display: none; }
+}
+
+/* ---------- Blazor boilerplate ---------- */
+
+#blazor-error-ui {
+    color-scheme: light only;
+    background: lightyellow;
+    bottom: 0;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+    display: none;
+    left: 0;
+    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+#blazor-error-ui .dismiss { cursor: pointer; position: absolute; right: 0.75rem; top: 0.5rem; }
+
+.loading-progress {
+    position: absolute;
+    display: block;
+    width: 8rem;
+    height: 8rem;
+    inset: 20vh 0 auto 0;
+    margin: 0 auto;
+}
+
+.loading-progress circle {
+    fill: none;
+    stroke: rgba(255, 255, 255, .6);
+    stroke-width: 0.6rem;
+    transform-origin: 50% 50%;
+    transform: rotate(-90deg);
+}
+
+.loading-progress circle:last-child {
+    stroke: var(--red);
+    stroke-dasharray: calc(3.141 * var(--blazor-load-percentage, 0%) * 0.8), 500%;
+    transition: stroke-dasharray 0.05s ease-in-out;
+}
+
+.loading-progress-text {
+    position: absolute;
+    text-align: center;
+    font-weight: bold;
+    inset: calc(20vh + 3.25rem) 0 auto 0.2rem;
+}
+
+.loading-progress-text:after { content: var(--blazor-load-percentage-text, "Indlæser"); }

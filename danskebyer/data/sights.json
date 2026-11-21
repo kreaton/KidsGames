@@ -1,0 +1,462 @@
+[
+ {
+  "id": "tivoli",
+  "name": "Tivoli",
+  "nearTownId": "koebenhavn",
+  "place": "København",
+  "lat": 55.6736,
+  "lon": 12.5681,
+  "description": "En gammel forlystelsespark midt i hovedstaden med rutsjebaner, blomster og lys om aftenen. Den åbnede i 1843.",
+  "wiki": "Tivoli Gardens"
+ },
+ {
+  "id": "havfruen",
+  "name": "Den Lille Havfrue",
+  "nearTownId": "koebenhavn",
+  "place": "København",
+  "lat": 55.6929,
+  "lon": 12.5993,
+  "description": "En lille bronzestatue af en havfrue, der sidder på en sten i vandet. Den er lavet efter H.C. Andersens eventyr.",
+  "wiki": "The Little Mermaid (statue)"
+ },
+ {
+  "id": "nyhavn",
+  "name": "Nyhavn",
+  "nearTownId": "koebenhavn",
+  "place": "København",
+  "lat": 55.6798,
+  "lon": 12.591,
+  "description": "En gammel havn med farverige huse, gamle skibe og mange caféer.",
+  "wiki": "Nyhavn"
+ },
+ {
+  "id": "amalienborg",
+  "name": "Amalienborg",
+  "nearTownId": "koebenhavn",
+  "place": "København",
+  "lat": 55.6841,
+  "lon": 12.5934,
+  "description": "Fire palæer omkring en stor plads, hvor kongefamilien bor. Man kan se vagtskiftet.",
+  "wiki": "Amalienborg"
+ },
+ {
+  "id": "rundetaarn",
+  "name": "Rundetårn",
+  "nearTownId": "koebenhavn",
+  "place": "København",
+  "lat": 55.6813,
+  "lon": 12.5758,
+  "description": "Et tårn fra 1600-tallet, hvor man går op i en skråtstillet snegang i stedet for trapper.",
+  "wiki": "Round Tower, Copenhagen"
+ },
+ {
+  "id": "kronborg",
+  "name": "Kronborg Slot",
+  "nearTownId": "helsingoer",
+  "place": "Helsingør",
+  "lat": 56.039,
+  "lon": 12.6212,
+  "description": "Renæssanceslottet, hvor Shakespeares Hamlet foregår. Det er på UNESCOs verdensarvsliste.",
+  "wiki": "Kronborg"
+ },
+ {
+  "id": "frederiksborg",
+  "name": "Frederiksborg Slot",
+  "nearTownId": "hilleroed",
+  "place": "Hillerød",
+  "lat": 55.9358,
+  "lon": 12.3009,
+  "description": "Et kæmpe slot på tre øer i Slotssøen. I dag er det Det Nationalhistoriske Museum.",
+  "wiki": "Frederiksborg Palace"
+ },
+ {
+  "id": "roskilde-domkirke",
+  "name": "Roskilde Domkirke",
+  "nearTownId": "roskilde",
+  "place": "Roskilde",
+  "lat": 55.643,
+  "lon": 12.0817,
+  "description": "En stor teglstenskirke, hvor næsten alle danske konger og dronninger er begravet. Den er på UNESCOs verdensarvsliste.",
+  "wiki": "Roskilde Cathedral"
+ },
+ {
+  "id": "vikingeskibe",
+  "name": "Vikingeskibsmuseet",
+  "nearTownId": "roskilde",
+  "place": "Roskilde",
+  "lat": 55.6522,
+  "lon": 12.0794,
+  "description": "Et museum med rigtige vikingeskibe, der blev sænket i fjorden for omkring 1.000 år siden.",
+  "wiki": "Viking Ship Museum, Roskilde"
+ },
+ {
+  "id": "legoland",
+  "name": "Legoland",
+  "nearTownId": "grindsted",
+  "place": "Billund",
+  "lat": 55.7352,
+  "lon": 9.127,
+  "description": "En forlystelsespark bygget af millioner af legoklodser. Den ligger i Billund, hvor Lego er opfundet.",
+  "wiki": "Legoland Billund Resort"
+ },
+ {
+  "id": "moesgaard",
+  "name": "Moesgaard Museum",
+  "nearTownId": "aarhus",
+  "place": "Aarhus",
+  "lat": 56.0834,
+  "lon": 10.2327,
+  "description": "Et arkæologisk museum med en skrå græsklædt tagflade, hvor du kan se Grauballemanden, en over 2.000 år gammel mand fra en mose.",
+  "wiki": "Moesgaard Museum"
+ },
+ {
+  "id": "aros",
+  "name": "ARoS Kunstmuseum",
+  "nearTownId": "aarhus",
+  "place": "Aarhus",
+  "lat": 56.1531,
+  "lon": 10.2003,
+  "description": "Et stort kunstmuseum med en regnbue på taget, som du kan gå rundt i.",
+  "wiki": "ARoS Aarhus Kunstmuseum"
+ },
+ {
+  "id": "gamle-by",
+  "name": "Den Gamle By",
+  "nearTownId": "aarhus",
+  "place": "Aarhus",
+  "lat": 56.1585,
+  "lon": 10.2118,
+  "description": "En hel by med gamle huse, hvor man kan opleve, hvordan danskerne boede og levede for mange år siden.",
+  "wiki": "Den Gamle By"
+ },
+ {
+  "id": "hc-andersen",
+  "name": "H.C. Andersens Hus",
+  "nearTownId": "odense",
+  "place": "Odense",
+  "lat": 55.3961,
+  "lon": 10.3877,
+  "description": "Museum om eventyrdigteren H.C. Andersen i huset, hvor han blev født og voksede op.",
+  "wiki": "Hans Christian Andersen Museum"
+ },
+ {
+  "id": "odense-zoo",
+  "name": "Odense Zoo",
+  "nearTownId": "odense",
+  "place": "Odense",
+  "lat": 55.3847,
+  "lon": 10.4273,
+  "description": "En af Danmarks bedste zoologiske haver med blandt andet løver, elefanter og pingviner.",
+  "wiki": "Odense Zoo"
+ },
+ {
+  "id": "jelling",
+  "name": "Jellingstenene",
+  "nearTownId": "vejle",
+  "place": "Jelling",
+  "lat": 55.7561,
+  "lon": 9.4194,
+  "description": "To store runesten fra vikingetiden. Den ene kaldes Danmarks fødselsattest, fordi der første gang står 'Danmark' på den. På UNESCOs verdensarvsliste.",
+  "wiki": "Jelling stones"
+ },
+ {
+  "id": "ribe-domkirke",
+  "name": "Ribe Domkirke",
+  "nearTownId": "ribe",
+  "place": "Ribe",
+  "lat": 55.3279,
+  "lon": 8.7615,
+  "description": "En stor romansk kirke i Danmarks ældste by, Ribe. Man kan gå op i tårnet og se over marsken.",
+  "wiki": "Ribe Cathedral"
+ },
+ {
+  "id": "mennesket",
+  "name": "Mennesket ved Havet",
+  "nearTownId": "esbjerg",
+  "place": "Esbjerg",
+  "lat": 55.466,
+  "lon": 8.418,
+  "description": "Fire kæmpestore hvide mænd, der sidder ved vandet og kigger ud over Vesterhavet.",
+  "wiki": "Men at Sea"
+ },
+ {
+  "id": "grenen",
+  "name": "Grenen",
+  "nearTownId": "frederikshavn",
+  "place": "Skagen",
+  "lat": 57.7449,
+  "lon": 10.632,
+  "description": "Danmarks nordligste spids, hvor Skagerrak og Kattegat mødes. Man kan stå med en fod i hvert hav.",
+  "wiki": "Grenen"
+ },
+ {
+  "id": "raabjerg-mile",
+  "name": "Råbjerg Mile",
+  "nearTownId": "frederikshavn",
+  "place": "Skagen",
+  "lat": 57.658,
+  "lon": 10.485,
+  "description": "En kæmpe sanddyne, der langsomt vandrer hen over landskabet.",
+  "wiki": "Råbjerg Mile"
+ },
+ {
+  "id": "moens-klint",
+  "name": "Møns Klint",
+  "nearTownId": "vordingborg",
+  "place": "Møn",
+  "lat": 54.968,
+  "lon": 12.544,
+  "description": "Høje, hvide kridtklinter, der rejser sig op fra Østersøen. Der kan findes fossiler på stranden.",
+  "wiki": "Møns Klint"
+ },
+ {
+  "id": "egeskov",
+  "name": "Egeskov Slot",
+  "nearTownId": "svendborg",
+  "place": "Kværndrup",
+  "lat": 55.175,
+  "lon": 10.4784,
+  "description": "Et vandslot fra 1500-tallet omgivet af voldgrav, med have, labyrint og en samling af veteranbiler og fly.",
+  "wiki": "Egeskov Castle"
+ },
+ {
+  "id": "soenderborg-slot",
+  "name": "Sønderborg Slot",
+  "nearTownId": "soenderborg",
+  "place": "Sønderborg",
+  "lat": 54.9114,
+  "lon": 9.7855,
+  "description": "Et slot ved Als Sund. I dag er der museum om de store slag i Sønderjylland.",
+  "wiki": "Sønderborg Castle"
+ },
+ {
+  "id": "dybboel",
+  "name": "Dybbøl Banke",
+  "nearTownId": "soenderborg",
+  "place": "Sønderborg",
+  "lat": 54.914,
+  "lon": 9.74,
+  "description": "Her stod et stort slag i 1864 mellem Danmark og Preussen. Du kan se den gamle mølle og skanserne.",
+  "wiki": "Battle of Dybbøl"
+ },
+ {
+  "id": "rubjerg",
+  "name": "Rubjerg Knude Fyr",
+  "nearTownId": "hjoerring",
+  "place": "Lønstrup",
+  "lat": 57.443,
+  "lon": 9.7739,
+  "description": "Et fyr på en høj klint ved Vesterhavet, som i 2019 blev flyttet 70 meter, fordi en sanddyne var ved at begrave det.",
+  "wiki": "Rubjerg Knude Lighthouse"
+ },
+ {
+  "id": "himmelbjerget",
+  "name": "Himmelbjerget",
+  "nearTownId": "silkeborg",
+  "place": "Ry",
+  "lat": 56.1,
+  "lon": 9.6833,
+  "description": "Et højt punkt (147 meter) med udsigt over søerne og skovene rundt om Silkeborg. Der står et tårn på toppen.",
+  "wiki": "Himmelbjerget"
+ },
+ {
+  "id": "museum-jorn",
+  "name": "Museum Jorn",
+  "nearTownId": "silkeborg",
+  "place": "Silkeborg",
+  "lat": 56.1717,
+  "lon": 9.5493,
+  "description": "Et kunstmuseum med værker af den danske kunstner Asger Jorn.",
+  "wiki": "Museum Jorn"
+ },
+ {
+  "id": "hammershus",
+  "name": "Hammershus",
+  "nearTownId": "roenne",
+  "place": "Bornholm",
+  "lat": 55.2686,
+  "lon": 14.757,
+  "description": "Nordeuropas største borgruin, oppe på en klippe ved havet i Nordbornholm.",
+  "wiki": "Hammershus"
+ },
+ {
+  "id": "zoo-aalborg",
+  "name": "Aalborg Zoo",
+  "nearTownId": "aalborg",
+  "place": "Aalborg",
+  "lat": 57.0415,
+  "lon": 9.8982,
+  "description": "En stor zoologisk have med mange dyr, blandt andet elefanter, løver og tigre.",
+  "wiki": "Aalborg Zoo"
+ },
+ {
+  "id": "koldinghus",
+  "name": "Koldinghus",
+  "nearTownId": "kolding",
+  "place": "Kolding",
+  "lat": 55.4939,
+  "lon": 9.4772,
+  "description": "Et kongeslot, der brændte i 1808. Ruinen blev bygget op igen, og i dag er der museum.",
+  "wiki": "Koldinghus"
+ },
+ {
+  "id": "fjordenhus",
+  "name": "Fjordenhus",
+  "nearTownId": "vejle",
+  "place": "Vejle",
+  "lat": 55.7088,
+  "lon": 9.543,
+  "description": "En bygning af kunstneren Olafur Eliasson, der står helt ude i vandet i havnen.",
+  "wiki": "Fjordenhus"
+ },
+ {
+  "id": "faengslet",
+  "name": "Fængslet",
+  "nearTownId": "horsens",
+  "place": "Horsens",
+  "lat": 55.8634,
+  "lon": 9.8446,
+  "description": "Et gammelt statsfængsel, der i dag er museum og koncertsted.",
+  "wiki": "Horsens State Prison"
+ },
+ {
+  "id": "trelleborg",
+  "name": "Trelleborg",
+  "nearTownId": "slagelse",
+  "place": "Slagelse",
+  "lat": 55.3918,
+  "lon": 11.2637,
+  "description": "En rund vikingeborg fra omkring år 980 med volde og gamle langhuse, som er genskabt.",
+  "wiki": "Trelleborg (Slagelse)"
+ },
+ {
+  "id": "nyborg-slot",
+  "name": "Nyborg Slot",
+  "nearTownId": "nyborg",
+  "place": "Nyborg",
+  "lat": 55.3127,
+  "lon": 10.7873,
+  "description": "Et af Danmarks ældste kongeslotte, bygget i 1100-tallet. Her mødtes Danehoffet, som var en slags tidlig rigsdag.",
+  "wiki": "Nyborg Castle"
+ },
+ {
+  "id": "valdemars-slot",
+  "name": "Valdemars Slot",
+  "nearTownId": "svendborg",
+  "place": "Tåsinge",
+  "lat": 55.015,
+  "lon": 10.637,
+  "description": "Et slot fra 1600-tallet bygget af Christian 4. til hans søn Valdemar Christian.",
+  "wiki": "Valdemars Castle"
+ },
+ {
+  "id": "vor-frue",
+  "name": "Vor Frue Kirke",
+  "nearTownId": "kalundborg",
+  "place": "Kalundborg",
+  "lat": 55.6797,
+  "lon": 11.0855,
+  "description": "En middelalderkirke med fem tårne bygget i form af et kors.",
+  "wiki": "Church of Our Lady, Kalundborg"
+ },
+ {
+  "id": "faxe-kalkbrud",
+  "name": "Faxe Kalkbrud",
+  "nearTownId": "haslev",
+  "place": "Faxe",
+  "lat": 55.257,
+  "lon": 12.13,
+  "description": "Et kæmpestort kalkbrud, hvor man kan finde fossiler af koraller og søpindsvin.",
+  "wiki": "Faxe Quarry"
+ },
+ {
+  "id": "spoettrup",
+  "name": "Spøttrup Borg",
+  "nearTownId": "skive",
+  "place": "Skive",
+  "lat": 56.6334,
+  "lon": 8.65,
+  "description": "Den bedst bevarede middelalderborg i Danmark med voldgrav, ridderhal og museum.",
+  "wiki": "Spøttrup Castle"
+ },
+ {
+  "id": "fyrkat",
+  "name": "Fyrkat",
+  "nearTownId": "hobro",
+  "place": "Hobro",
+  "lat": 56.6321,
+  "lon": 9.8074,
+  "description": "En rund vikingeborg fra omkring år 980, ligesom Trelleborg. Man kan se et genskabt langhus.",
+  "wiki": "Fyrkat"
+ },
+ {
+  "id": "kattegatcentret",
+  "name": "Kattegatcentret",
+  "nearTownId": "grenaa",
+  "place": "Grenaa",
+  "lat": 56.413,
+  "lon": 10.886,
+  "description": "Et stort akvarium med hajer, sæler og fisk fra de danske farvande.",
+  "wiki": "Kattegatcentret"
+ },
+ {
+  "id": "gaasetaarnet",
+  "name": "Gåsetårnet",
+  "nearTownId": "vordingborg",
+  "place": "Vordingborg",
+  "lat": 55.0085,
+  "lon": 11.9087,
+  "description": "Et tårn fra 1300-tallet med en guldgås på toppen, bygget af kong Valdemar Atterdag.",
+  "wiki": "Goose Tower"
+ },
+ {
+  "id": "lillebaelt",
+  "name": "Lillebæltsbroerne",
+  "nearTownId": "middelfart",
+  "place": "Middelfart",
+  "lat": 55.515,
+  "lon": 9.7015,
+  "description": "To store broer, en gammel fra 1935 og en ny fra 1970, der forbinder Fyn og Jylland.",
+  "wiki": "Little Belt Bridge"
+ },
+ {
+  "id": "regnskov",
+  "name": "Randers Regnskov",
+  "nearTownId": "randers",
+  "place": "Randers",
+  "lat": 56.4578,
+  "lon": 10.0398,
+  "description": "En tropisk regnskov under tag med aber, krokodiller, slanger og frøer.",
+  "wiki": "Randers Regnskov"
+ },
+ {
+  "id": "louisiana",
+  "name": "Louisiana",
+  "nearTownId": "humlebaek",
+  "place": "Humlebæk",
+  "lat": 55.969,
+  "lon": 12.543,
+  "description": "Et kunstmuseum i en stor have ned til Øresund, med skulpturer man kan gå rundt imellem og et børnehus, hvor man selv kan lave kunst.",
+  "wiki": "Louisiana Museum of Modern Art"
+ },
+ {
+  "id": "fredensborg-slot",
+  "name": "Fredensborg Slot",
+  "nearTownId": "fredensborg",
+  "place": "Fredensborg",
+  "lat": 55.977,
+  "lon": 12.403,
+  "description": "Et hvidt kongeslot ved Esrum Sø, hvor kongefamilien bor om foråret og efteråret. Slotshaven er åben for alle.",
+  "wiki": "Fredensborg Palace"
+ },
+ {
+  "id": "nationalpark-thy",
+  "name": "Nationalpark Thy",
+  "nearTownId": "thisted",
+  "place": "Thy",
+  "lat": 57.0,
+  "lon": 8.4,
+  "description": "Danmarks første nationalpark med klitter, hede og vilde dyr. Her kan man også surfe ved Cold Hawaii.",
+  "wiki": "Thy National Park"
+ }
+]

@@ -6,7 +6,7 @@
 
 ⭐ Hvis KidsGames fortjener en plads på din maskine, så [giv det en stjerne på GitHub](https://github.com/kreaton/KidsGames) — det er gratis, lavet af én udvikler, og stjerner er det, der får andre til at finde det.
 
-![Børnenes Spil: forsiden til otte små spil](images/banner.png)
+![Børnenes Spil: forsiden til de små spil](images/banner.png)
 
 **Forsiden til tolv små spil.**
 

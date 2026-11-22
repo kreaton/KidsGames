@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Børnenes Spil</title>
-  <meta name="description" content="Små lærerige spil om tal, gangetabeller, terninger og stavning – lavet til børn." />
+  <meta name="description" content="Små lærerige spil om tal, gangetabeller, terninger, kort og stavning – lavet til børn." />
   <link rel="icon" type="image/png" href="billeder/favicon.png" />
   <link rel="apple-touch-icon" href="billeder/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -108,6 +108,7 @@
     .c4 { --accent: #e67700; } .c5 { --accent: #7950f2; } .c6 { --accent: #e8590c; }
     .c7 { --accent: #1c7ed6; } .c8 { --accent: #e64980; } .c9 { --accent: #e03131; }
     .c10 { --accent: #ae3ec9; } .c11 { --accent: #0c8599; } .c12 { --accent: #c8102e; }
+    .c13 { --accent: #1d7a4b; }
 
     .hint {
       display: flex; align-items: flex-start; gap: 12px; max-width: 34rem; margin: 22px auto 0;
@@ -136,7 +137,7 @@
     <header>
       <div class="bubbles" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>A</span></div>
       <h1>Børnenes Spil</h1>
-      <p class="lead">Små, glade spil om tal, terninger, bogstaver, klokken og Danmarks byer. De virker på mobil og iPad – og kan lægges på hjemmeskærmen som en app.</p>
+      <p class="lead">Små, glade spil om tal, terninger, kort, bogstaver, klokken og Danmarks byer. De virker på mobil og iPad – og kan lægges på hjemmeskærmen som en app.</p>
       <!-- Shown only in Safari on iPhone/iPad: a page opened from a link keeps Safari's bars,
            while a game added to the home screen gets the whole screen. -->
       <div class="hint" id="hint" hidden>
@@ -148,6 +149,16 @@
     </header>
 
     <main class="grid">
+      <a class="card c13" href="easysolitaire/">
+        <div class="top">
+          <img class="icon" src="billeder/easysolitaire.png" alt="" width="88" height="88" />
+          <h2>Let Kabale<span class="orig">Easy Solitaire</span></h2>
+        </div>
+        <p>Kabale for børn, med søde dyr i stedet for hjerter, ruder, spar og klør. Læg kortene i kolonner – ét tal lavere og den anden farve – og byg dem op i hjemmebunkerne fra 1. Efter hvert træk forklarer spillet, hvorfor det var lovligt.</p>
+        <ul class="tags"><li>Kortspil</li><li>Logik</li><li>3 niveauer</li></ul>
+        <span class="play">Spil <span>➜</span></span>
+      </a>
+
       <a class="card c12" href="danskebyer/">
         <div class="top">
           <img class="icon" src="billeder/danskebyer.png" alt="" width="88" height="88" />

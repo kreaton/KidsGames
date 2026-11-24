@@ -352,6 +352,81 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--blue); outline-
 .big-btn.ghost { background: #fff; color: var(--ink); box-shadow: var(--shadow); }
 .big-btn:active { transform: translateY(.3rem); box-shadow: var(--shadow-pressed); }
 
+/* ---------- Check language (for grown-ups) ---------- */
+
+.check-btn {
+    display: inline-flex; align-items: center; gap: .35rem; flex: none;
+    height: 2.9rem; padding: 0 .9rem;
+    border-radius: 999px; background: #fff;
+    font-size: 1rem; font-weight: 700;
+    box-shadow: 0 .25rem 0 rgba(43, 35, 64, .18), 0 .5rem 1rem -.5rem rgba(43, 35, 64, .35);
+}
+.check-btn:active { transform: translateY(.2rem); box-shadow: var(--shadow-pressed); }
+.check-btn span[aria-hidden] { font-size: 1.2rem; }
+
+.check-backdrop {
+    position: fixed; inset: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: center;
+    padding: 1rem;
+    background: rgba(43, 35, 64, .45);
+}
+.check {
+    width: min(40rem, 100%); max-height: 100%; overflow-x: hidden; overflow-y: auto;
+    display: flex; flex-direction: column; gap: .9rem;
+    padding: 1rem 1.2rem 1.1rem;
+    border-radius: 1.6rem; background: #fff;
+    box-shadow: 0 .5rem 0 rgba(43, 35, 64, .2), 0 1rem 3rem rgba(43, 35, 64, .35);
+}
+.check-head { display: flex; align-items: center; justify-content: space-between; gap: .5rem; }
+.check-head h2 { margin: 0; font-size: 1.5rem; }
+
+.check-controls { display: flex; flex-wrap: wrap; gap: .6rem; align-items: end; }
+.check-lang { display: flex; flex-direction: column; gap: .2rem; font-size: .85rem; font-weight: 700; }
+.check-lang select {
+    font: inherit; font-size: 1rem; font-weight: 400;
+    padding: .45rem .6rem; border-radius: .7rem;
+    border: 2px solid #dee2e6; background: #f8f9fa; color: var(--ink);
+}
+.check-kinds { display: flex; gap: .35rem; flex-wrap: wrap; }
+.check-kinds button {
+    padding: .5rem .8rem; border-radius: 999px;
+    background: #f1f3f5; font-weight: 700; font-size: .95rem;
+    box-shadow: var(--shadow-small);
+}
+.check-kinds button.active { background: #fff3bf; box-shadow: 0 0 0 3px var(--yellow), var(--shadow-small); }
+.check-kinds .count { font-weight: 400; opacity: .6; font-size: .8rem; }
+
+.check-item {
+    display: flex; flex-direction: column; align-items: center; gap: .3rem;
+    padding: .9rem 1rem 1rem;
+    border-radius: 1.2rem; background: #f8f9fa;
+    border: 3px solid transparent;
+    text-align: center;
+}
+.check-item.skipped { background: #fff4e6; border-color: var(--orange); }
+.check-id { align-self: stretch; display: flex; justify-content: space-between; font-variant-numeric: tabular-nums; }
+.check-id .id { font-family: ui-monospace, Consolas, monospace; font-weight: 700; font-size: 1.1rem; background: #fff; padding: .1rem .5rem; border-radius: .5rem; }
+.check-id .pos { opacity: .65; }
+.check-main { font-size: 5rem; line-height: 1.1; font-weight: 700; min-height: 5.5rem; }
+.check-text { font-size: 2rem; font-weight: 700; min-height: 2.4rem; }
+.check-ref { opacity: .7; }
+.check-note { font-size: .9rem; color: #c2410c; font-weight: 700; max-width: 32rem; }
+.check-file { font-family: ui-monospace, Consolas, monospace; font-size: .75rem; opacity: .55; overflow-wrap: anywhere; }
+
+.check-media { display: flex; justify-content: center; gap: .8rem; }
+.media-btn {
+    width: 3.6rem; height: 3.6rem; border-radius: 50%;
+    background: #f1f3f5; font-size: 1.5rem; line-height: 1;
+    display: inline-flex; align-items: center; justify-content: center;
+    box-shadow: var(--shadow-small);
+}
+.media-btn.media-play { width: 4.4rem; height: 4.4rem; font-size: 1.9rem; background: var(--green); color: #fff; box-shadow: 0 .25rem 0 var(--green-dark); }
+.media-btn.media-play.on { animation: pulse .6s ease-in-out infinite alternate; }
+.media-btn:active:not(:disabled) { transform: translateY(.15rem); box-shadow: var(--shadow-pressed); }
+.media-btn:disabled { opacity: .35; cursor: default; }
+.check-slider { width: 100%; accent-color: var(--purple); }
+.check-help { margin: 0; text-align: center; font-size: .78rem; opacity: .65; }
+
 /* ---------- Footer ---------- */
 
 .credits { margin-top: auto; text-align: center; font-size: .8rem; color: rgba(43, 35, 64, .75); }
@@ -361,6 +436,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--blue); outline-
 
 @media (max-width: 720px) {
     .page { padding: .6rem .7rem .5rem; }
+    .logo { min-width: 0; text-align: left; }
     .logo h1 { font-size: 1.45rem; }
     .logo-heads { display: none; }
     .title { gap: .4rem; }
@@ -368,6 +444,11 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--blue); outline-
     .round-btn, .back-btn, .kg-home { width: 2.5rem; height: 2.5rem; font-size: 1.15rem; }
     .kg-home svg { width: 1.35rem; height: 1.35rem; }
     .pair-btn { height: 2.5rem; padding: 0 .4rem; }
+    .check-btn { height: 2.5rem; width: 2.5rem; padding: 0; justify-content: center; }
+    .check-label { display: none; }
+    .check { padding: .8rem .8rem 1rem; gap: .7rem; }
+    .check-main { font-size: 4rem; min-height: 4.4rem; }
+    .check-text { font-size: 1.6rem; }
     .pair-btn .mini .kid { width: 1.7rem; height: 1.9rem; }
     .levels { flex-wrap: nowrap; gap: .4rem; width: 100%; }
     .level-btn { min-width: 0; flex: 1; padding: .45rem .3rem; }
@@ -419,4 +500,9 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--blue); outline-
 
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+}
+
+/* On a phone the header has four buttons; the name goes on two lines when it doesn't fit beside them. */
+@media (max-width: 440px) {
+    .logo h1 { white-space: normal; font-size: 1.3rem; line-height: 1.05; }
 }

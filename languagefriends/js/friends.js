@@ -96,6 +96,27 @@ window.friends = {
         this._tones([[523.3, 0, 0.18, 0.28], [659.3, 0.12, 0.18, 0.28], [784.0, 0.24, 0.18, 0.28], [1046.5, 0.36, 0.6, 0.3]]);
     },
 
+    // The Check language pane: ← and → step, space plays, Escape closes. Keys typed in a list or slider
+    // are left to it, and space on a button is the button's own click.
+    _keys: null,
+    listenKeys(dotnet) {
+        this.unlistenKeys();
+        this._keys = e => {
+            const tag = e.target?.tagName;
+            if (tag === "SELECT" || tag === "INPUT" || e.altKey || e.ctrlKey || e.metaKey) return;
+            const key = e.key === "ArrowLeft" ? "prev" : e.key === "ArrowRight" ? "next"
+                : e.key === "Escape" ? "close" : e.key === " " && tag !== "BUTTON" ? "play" : null;
+            if (!key) return;
+            e.preventDefault();
+            dotnet.invokeMethodAsync("Key", key);
+        };
+        document.addEventListener("keydown", this._keys);
+    },
+    unlistenKeys() {
+        if (this._keys) document.removeEventListener("keydown", this._keys);
+        this._keys = null;
+    },
+
     load(key) {
         try { return localStorage.getItem(key); } catch { return null; }
     },
